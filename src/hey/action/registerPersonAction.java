@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Map;
 
-public class registerPersonAction  extends ActionSupport implements SessionAware {
+public class registerPersonAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
     private String username = null; // username and password supplied by the user

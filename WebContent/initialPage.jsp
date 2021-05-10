@@ -9,5 +9,7 @@
 </head>
 <body>
     <p><a href="<s:url action="registerPersonAction" />">Registar um utilizador</a></p>
+    <p><a href="<s:url action="createElectionAction" />">Criar Eleicao</a></p>
+    <p><a href="<s:url action="index" />">Sair de Sessão</a></p>
 </body>
 </html>

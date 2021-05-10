@@ -8,6 +8,8 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 import rmiserver.InterfaceServerRMI;
 import rmiserver.Pessoa;
 
@@ -21,6 +23,11 @@ public class ServerRmiBean {
 	private String work;
 	private String CCval;
 	private String department;
+	private String nameElection;
+	private String initDate;
+	private String endDate;
+	private String publicTarget;
+	private ArrayList<String> personName = new ArrayList<String>();
 
 	public ServerRmiBean() {
 		try {
@@ -29,6 +36,45 @@ public class ServerRmiBean {
 		catch(NotBoundException|MalformedURLException|RemoteException e) {
 			e.printStackTrace(); // what happens *after* we reach this line?
 		}
+	}
+
+	public boolean verifyUsers() throws RemoteException {
+		boolean flag =  server.verifyUser(this.username,this.ccnumber,this.password);
+		if(flag){
+			server.print_on_server("login done");
+		}
+		else{
+			server.print_on_server("login wrong");
+		}
+
+		return flag;
+	}
+
+	public void registerUsers() throws IOException {
+		Pessoa pessoa = new Pessoa();
+		pessoa.RegisterPerson(this.username,this.phone,this.address,this.ccnumber,this.CCval,this.work,this.department,this.password);
+		server.print_on_server(pessoa.toString());
+		server.SaveRegistry(pessoa);
+	}
+
+	public void createElection() throws  IOException {
+		server.print_on_server("Eleicao Criada com Sucesso !");
+
+	}
+
+	public ArrayList<String> getUsers() throws IOException{
+		for(int i = 0; i<server.getPerson().size(); i++){
+			personName.add(server.getPerson().get(i).getNome());
+		}
+		return personName;
+	}
+
+	public void setPersonName(ArrayList<String> personName) {
+		this.personName = personName;
+	}
+
+	public void setCcnumber(String ccnumber) {
+		this.ccnumber = ccnumber;
 	}
 
 	public void setUsername(String username) {
@@ -51,10 +97,6 @@ public class ServerRmiBean {
 		this.server = server;
 	}
 
-	public void setCcnumber(String ccnumber) {
-		this.ccnumber = ccnumber;
-	}
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
@@ -71,22 +113,20 @@ public class ServerRmiBean {
 		this.department = department;
 	}
 
-	public boolean verifyUsers() throws RemoteException {
-		boolean flag =  server.verifyUser(this.username,this.ccnumber,this.password);
-		if(flag){
-			server.print_on_server("login done");
-		}
-		else{
-			server.print_on_server("login wrong");
-		}
-
-		return flag;
+	public void setNameElection(String nameElection) {
+		this.nameElection = nameElection;
 	}
 
-	public void registerUsers() throws IOException {
-		Pessoa pessoa = new Pessoa();
-		pessoa.RegisterPerson(this.username,this.phone,this.address,this.ccnumber,this.CCval,this.work,this.department,this.password);
-		server.print_on_server(pessoa.toString());
-		server.SaveRegistry(pessoa);
+	public void setInitDate(String initDate) {
+		this.initDate = initDate;
 	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setPublicTarget(String publicTarget) {
+		this.publicTarget = publicTarget;
+	}
+
 }

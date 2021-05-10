@@ -19,7 +19,8 @@
 		</c:otherwise>
 	</c:choose>
 
-	<c:forEach items="${serverRmiBean.allUsers}" var="value">
+
+	<c:forEach items="${ServerRmiBean.allUsers}" var="value">
 		<c:out value="${value}" />
 		<a href="">"${value}"</a>
 		<br>
