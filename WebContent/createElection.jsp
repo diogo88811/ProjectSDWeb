@@ -20,6 +20,7 @@
     <s:textfield name="endDate" /><br>
     <s:text name="Publico Alvo:" />
     <s:textfield name="publicTarget" /><br>
+
     <select name="" >
         <c:forEach items="${heyBean.users}" var="value">
             <option> ${value} </option>

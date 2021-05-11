@@ -1,4 +1,4 @@
-package hey.model;
+package rmiserver;
 
 import rmiserver.Pessoa;
 

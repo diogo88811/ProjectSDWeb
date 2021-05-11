@@ -1,6 +1,3 @@
-/**
- * Raul Barbosa 2014-11-07
- */
 package hey.model;
 
 import java.io.IOException;
@@ -11,6 +8,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import rmiserver.InterfaceServerRMI;
+import rmiserver.Eleicao;
 import rmiserver.Pessoa;
 
 public class ServerRmiBean {
@@ -27,7 +25,11 @@ public class ServerRmiBean {
 	private String initDate;
 	private String endDate;
 	private String publicTarget;
+	private String nameList;
+	private String principalCandidate;
+	private String electionSelected;
 	private ArrayList<String> personName = new ArrayList<String>();
+	private ArrayList<String> electionName = new ArrayList<String>();
 
 	public ServerRmiBean() {
 		try {
@@ -59,7 +61,10 @@ public class ServerRmiBean {
 
 	public void createElection() throws  IOException {
 		server.print_on_server("Eleicao Criada com Sucesso !");
+	}
 
+	public void createList() throws  IOException {
+		server.print_on_server("Lista Criada com Sucesso !");
 	}
 
 	public ArrayList<String> getUsers() throws IOException{
@@ -69,8 +74,20 @@ public class ServerRmiBean {
 		return personName;
 	}
 
+	public ArrayList<String> getElection() throws IOException{
+
+		for(int i = 0; i<server.getEleicoes().size(); i++){
+			electionName.add(server.getEleicoes().get(i).getNome());
+		}
+		return electionName;
+	}
+
 	public void setPersonName(ArrayList<String> personName) {
 		this.personName = personName;
+	}
+
+	public void setElectionName(ArrayList<String> electionName) {
+		this.electionName = electionName;
 	}
 
 	public void setCcnumber(String ccnumber) {
@@ -129,4 +146,15 @@ public class ServerRmiBean {
 		this.publicTarget = publicTarget;
 	}
 
+	public void setNameList(String nameList) {
+		this.nameList = nameList;
+	}
+
+	public void setPrincipalCandidate(String principalCandidate) {
+		this.principalCandidate = principalCandidate;
+	}
+
+	public void setElectionSelected(String electionSelected) {
+		this.electionSelected = electionSelected;
+	}
 }

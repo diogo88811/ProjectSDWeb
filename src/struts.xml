@@ -55,6 +55,15 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
           <result name="error">/index.jsp</result>
       </action>
 
+      <action name="addListToElectionAction" >
+          <result>/addListToElection.jsp</result>
+      </action>
+
+      <action name="addListToElection" class="hey.action.addListToElectionAction" method="execute">
+          <result name="success">/initialPage.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
+
   </package>
 
 </struts>
