@@ -16,7 +16,8 @@ public class addListToElectionAction extends ActionSupport implements SessionAwa
 
     @Override
     public String execute() throws IOException {
-        if(!nameList.equals("") && !principalCandidate.equals("") && electionSelected.equals("")){
+        System.out.println("selecionei: " + this.electionSelected);
+        if(!nameList.equals("") && !principalCandidate.equals("") && !electionSelected.equals("")){
             this.getHeyBean().setNameList(this.nameList);
             this.getHeyBean().setPrincipalCandidate(this.principalCandidate);
             this.getHeyBean().setElectionSelected(this.electionSelected);

@@ -21,7 +21,7 @@
   <s:text name="Eleição: " />
   <p>
     <c:forEach items="${heyBean.election}" var="value">
-      <input type="radio" id="${value}" name="list" value="${value}">
+      <input type="radio" id="${value}" name="electionSelected" value="${value}">
       <label for="${value}">${value}</label><br>
     </c:forEach>
   </p>

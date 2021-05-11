@@ -75,7 +75,7 @@ public class ServerRmiBean {
 	}
 
 	public ArrayList<String> getElection() throws IOException{
-
+		electionName.clear();
 		for(int i = 0; i<server.getEleicoes().size(); i++){
 			electionName.add(server.getEleicoes().get(i).getNome());
 		}
