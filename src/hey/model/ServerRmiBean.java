@@ -30,7 +30,12 @@ public class ServerRmiBean {
 	private String electionSelected;
 	private ArrayList<String> personName = new ArrayList<String>();
 	private ArrayList<String> electionName = new ArrayList<String>();
+	private ArrayList<Eleicao> elections = new ArrayList<Eleicao>();
+	private ArrayList<Pessoa> listParticipants = new ArrayList<Pessoa>();
 	private String typePerson;
+	private String newElectionName;
+	private String newInitDateElection;
+	private String newEndDateElection;
 
 	public ServerRmiBean() {
 		try {
@@ -66,10 +71,40 @@ public class ServerRmiBean {
 
 	public void createElection() throws  IOException {
 		server.print_on_server("Eleicao Criada com Sucesso !");
+		/*for(int i = 0; i <server.getEleicoes().size(); i++){
+			if(electionName.equals(server.getEleicoes().get(i).getNome())){
+				elections.add(server.getEleicoes().get(i));
+			}
+		}*/
 	}
+
+	/*public void addPersonByNameToList(String personNome) throws IOException{
+		for(int i = 0; i <server.getPerson().size(); i++){
+			if(personNome.equals(server.getPerson().get(i).getNome())){
+				listParticipants.add(server.getPerson().get(i));
+			}
+		}
+	}*/
 
 	public void createList() throws  IOException {
 		server.print_on_server("Lista Criada com Sucesso !");
+	}
+
+	public void updateElection(String eleicao, String nome, String init, String end){
+		for(int i=0; i<elections.size(); i++){
+			System.out.println(elections.get(i).getNome() + " = " + eleicao);
+			if(elections.get(i).getNome().equals(eleicao)){
+				if(!nome.equals("")){
+					elections.get(i).setNome(nome);
+				}
+				if(!init.equals("")){
+					elections.get(i).setDataInicio(init);
+				}
+				if(!end.equals("")){
+					elections.get(i).setDataFim(end);
+				}
+			}
+		}
 	}
 
 	public ArrayList<String> getUsers() throws IOException{
@@ -87,6 +122,8 @@ public class ServerRmiBean {
 		}
 		return electionName;
 	}
+
+
 
 	public void setPersonName(ArrayList<String> personName) {
 		this.personName = personName;
@@ -166,5 +203,21 @@ public class ServerRmiBean {
 
 	public void setTypePerson(String typePerson) {
 		this.typePerson = typePerson;
+	}
+
+	public void setElections(ArrayList<Eleicao> elections) {
+		this.elections = elections;
+	}
+
+	public void setNewElectionName(String newElectionName) {
+		this.newElectionName = newElectionName;
+	}
+
+	public void setNewInitDateElection(String newInitDateElection) {
+		this.newInitDateElection = newInitDateElection;
+	}
+
+	public void setNewEndDateElection(String newEndDateElection) {
+		this.newEndDateElection = newEndDateElection;
 	}
 }

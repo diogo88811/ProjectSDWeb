@@ -21,12 +21,20 @@
     <s:textfield name="CCval" /><br>
     <s:text name="Morada:" />
     <s:textfield name="address" /><br>
-    <s:text name="Funcao(ESTUDANTE, DOCENTE, FUNCIONARIO):" />
-    <s:textfield name="work" /><br>
+    <s:text name="Função: " />
+    <select name="work">
+        <option>ESTUDANTE</option>
+        <option>DOCENTE</option>
+        <option>FUNCIONARIO</option>
+    </select>
+    <br>
     <s:text name="Departamento" />
     <s:textfield name="department" /><br>
-    <s:text name="ADMIN/USER" />
-    <s:textfield name="typePerson" /><br>
+    <select name="typePerson">
+        <option>ADMIN</option>
+        <option>USER</option>
+    </select>
+    <br>
     <s:submit />
 </s:form>
 </body>
