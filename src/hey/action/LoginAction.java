@@ -13,7 +13,7 @@ import java.util.Map;
 public class LoginAction extends ActionSupport implements SessionAware {
 	private static final long serialVersionUID = 4L;
 	private Map<String, Object> session;
-	private String username = null, password = null, ccnumber = null;
+	private String username = null, password = null, ccnumber = null, typePerson = null ;
 
 	@Override
 	public String execute() throws RemoteException{
@@ -22,11 +22,17 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			this.getHeyBean().setUsername(this.username);
 			this.getHeyBean().setPassword(this.password);
 			this.getHeyBean().setCcNumber(this.ccnumber);
-			boolean correctPassword = this.getHeyBean().verifyUsers();
-			if(correctPassword){
+			this.getHeyBean().setTypePerson(this.typePerson);
+			String aux = this.getHeyBean().verifyUsers();
+			if(aux.equals("ADMIN") || aux.equals("USER")){
 				session.put("username", username);
 				session.put("loggedin", true); // this marks the user as logged in
-				return SUCCESS;
+				if(aux.equals("ADMIN")){
+					return SUCCESS;
+				}
+				else{
+					return ERROR;
+				}
 			}
 			return LOGIN;
 		}
@@ -45,7 +51,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	public void setCcnumber(String ccnumber) {
 		this.ccnumber = ccnumber; // what about this input?
 	}
-	
+
+	public void setTypePerson(String typePerson) {
+		this.typePerson = typePerson;
+	}
+
 	public ServerRmiBean getHeyBean() {
 		if(!session.containsKey("heyBean"))
 			this.setHeyBean(new ServerRmiBean());

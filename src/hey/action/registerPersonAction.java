@@ -18,6 +18,7 @@ public class registerPersonAction extends ActionSupport implements SessionAware 
     private String work= null;
     private String CCval = null;
     private String department = null;
+    private String typePerson = null;
     @Override
     public String execute() throws IOException {
         if(this.username != null && !username.equals("") && !password.equals("")){
@@ -36,9 +37,10 @@ public class registerPersonAction extends ActionSupport implements SessionAware 
         else{
             return ERROR;
         }
-        if(this.CCval != null && !department.equals("")){
+        if(this.CCval != null && !department.equals("") && !typePerson.equals("")){
             this.getHeyBean().setCCval(this.CCval);
             this.getHeyBean().setDepartment(this.department);
+            this.getHeyBean().setTypePerson(this.typePerson);
         }
         else{
             return ERROR;
@@ -77,6 +79,10 @@ public class registerPersonAction extends ActionSupport implements SessionAware 
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public void setTypePerson(String typePerson) {
+        this.typePerson = typePerson;
     }
 
     public ServerRmiBean getHeyBean() {

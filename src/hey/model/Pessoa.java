@@ -12,10 +12,10 @@ public class Pessoa implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    public String nome, password, trabalho, departamento, telemovel, morada, CCnumber, CCVal;
+    public String nome, password, trabalho, departamento, telemovel, morada, CCnumber, CCVal, typePerson;
     public ArrayList<String> Tables = new  ArrayList<String>();
 
-    public Pessoa(String nome, String password, String job, String telemovel, String morada, String CCnumber, String CCVal, String departamento, ArrayList<String> Tables){
+    public Pessoa(String nome, String password, String job, String telemovel, String morada, String CCnumber, String CCVal, String departamento, ArrayList<String> Tables,String typePerson){
         this.nome = nome;
         this.password = password;
         this.trabalho = job;
@@ -25,6 +25,7 @@ public class Pessoa implements Serializable {
         this.CCnumber = CCnumber;
         this.CCVal = CCVal;
         this.Tables = Tables;
+        this.typePerson = typePerson;
     }
 
     public Pessoa() {
@@ -98,6 +99,14 @@ public class Pessoa implements Serializable {
         return this.Tables;
     }
 
+    public String getTypePerson() {
+        return typePerson;
+    }
+
+    public void setTypePerson(String typePerson) {
+        this.typePerson = typePerson;
+    }
+
     public String toString(){//overriding the toString() method
         return  "USERNAME: "       + this.nome         +
                 "\nPASSWORD: "     + this.password     +
@@ -106,10 +115,11 @@ public class Pessoa implements Serializable {
                 "\nTELE: "         + this.telemovel    +
                 "\nADRESS: "       + this.morada       +
                 "\nCCNUMBER: "     + this.CCnumber     +
-                "\nCCVAL: "        + this.CCVal        ;
+                "\nCCVAL: "        + this.CCVal        +
+                "\nType: "         + this.typePerson    ;
     }
 
-    public void RegisterPerson(String nome,String telemovel,String morada,String cc,String CCval,String cargo, String departamento, String pass) throws IOException {
+    public void RegisterPerson(String nome,String telemovel,String morada,String cc,String CCval,String cargo, String departamento, String pass,String typePerson) throws IOException {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
         Scanner scan = new Scanner(System.in);
@@ -123,6 +133,6 @@ public class Pessoa implements Serializable {
         this.trabalho = cargo;
         this.departamento = departamento;
         this.password = pass;
-
+        this.typePerson = typePerson;
     }
 }

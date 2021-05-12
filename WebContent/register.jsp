@@ -25,6 +25,8 @@
     <s:textfield name="work" /><br>
     <s:text name="Departamento" />
     <s:textfield name="department" /><br>
+    <s:text name="ADMIN/USER" />
+    <s:textfield name="typePerson" /><br>
     <s:submit />
 </s:form>
 </body>

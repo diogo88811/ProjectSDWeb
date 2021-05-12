@@ -30,6 +30,7 @@ public class ServerRmiBean {
 	private String electionSelected;
 	private ArrayList<String> personName = new ArrayList<String>();
 	private ArrayList<String> electionName = new ArrayList<String>();
+	private String typePerson;
 
 	public ServerRmiBean() {
 		try {
@@ -40,21 +41,25 @@ public class ServerRmiBean {
 		}
 	}
 
-	public boolean verifyUsers() throws RemoteException {
+	public String verifyUsers() throws RemoteException {
 		boolean flag =  server.verifyUser(this.username,this.ccnumber,this.password);
-		if(flag){
-			server.print_on_server("login done");
+		for(int i = 0; i < server.getPerson().size();i++){
+			if(server.getPerson().get(i).getNome().equals(this.username) && server.getPerson().get(i).getCCnumber().equals(this.ccnumber
+			)){
+				if(server.getPerson().get(i).getTypePerson().equals("ADMIN")){
+					return "ADMIN";
+				}
+				else{
+					return "USER";
+				}
+			}
 		}
-		else{
-			server.print_on_server("login wrong");
-		}
-
-		return flag;
+		return "none";
 	}
 
 	public void registerUsers() throws IOException {
 		Pessoa pessoa = new Pessoa();
-		pessoa.RegisterPerson(this.username,this.phone,this.address,this.ccnumber,this.CCval,this.work,this.department,this.password);
+		pessoa.RegisterPerson(this.username,this.phone,this.address,this.ccnumber,this.CCval,this.work,this.department,this.password,this.typePerson);
 		server.print_on_server(pessoa.toString());
 		server.SaveRegistry(pessoa);
 	}
@@ -68,6 +73,7 @@ public class ServerRmiBean {
 	}
 
 	public ArrayList<String> getUsers() throws IOException{
+		personName.clear();
 		for(int i = 0; i<server.getPerson().size(); i++){
 			personName.add(server.getPerson().get(i).getNome());
 		}
@@ -156,5 +162,9 @@ public class ServerRmiBean {
 
 	public void setElectionSelected(String electionSelected) {
 		this.electionSelected = electionSelected;
+	}
+
+	public void setTypePerson(String typePerson) {
+		this.typePerson = typePerson;
 	}
 }
