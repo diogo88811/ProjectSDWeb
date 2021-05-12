@@ -21,6 +21,7 @@ public class infoListAction extends ActionSupport implements SessionAware {
         else{
             return ERROR;
         }
+        this.getHeyBean().createList(this.nameList, this.principalCandidate);
         return SUCCESS;
     }
 

@@ -77,17 +77,17 @@ public class ServerRmiBean {
 	}
 
 	//Cria uma Lista
-	public void createList(String nameList, String person, String election) throws  IOException {
-		/*
-		Pessoa addPerson;
-		for(int i=0; i<server.getPerson().size(); i++){
+	public void createList(String listName, String person) throws  IOException {
+		Pessoa p = new Pessoa();
+		for(int i = 0; i < server.getPerson().size(); i++){
 			if(server.getPerson().get(i).getNome().equals(person)){
-				addPerson = server.getPerson().get(i);
+				p = server.getPerson().get(i);
 			}
 		}
-		Lista lista = new Lista(null, person, nameList);
-		server.print_on_server("Lista Criada com Sucesso !");
-		 */
+
+		String aux = getElectionSelected();
+		server.addListToElection(aux,listName,p);
+
 	}
 
 	public ArrayList<String>  getpeopletoelection() throws RemoteException {

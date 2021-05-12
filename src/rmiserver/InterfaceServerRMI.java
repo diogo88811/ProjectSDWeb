@@ -10,4 +10,5 @@ public interface InterfaceServerRMI extends Remote {
 	public ArrayList<rmiserver.Pessoa> getPerson() throws RemoteException;
 	public ArrayList<rmiserver.Eleicao> getEleicoes() throws RemoteException;
 	public void criarEleicao(rmiserver.Eleicao eleicao) throws RemoteException;
+	public void addListToElection(String nameElection,String listname, rmiserver.Pessoa p) throws RemoteException;
 	}
