@@ -45,7 +45,7 @@ public class registerPersonAction extends ActionSupport implements SessionAware 
         else{
             return ERROR;
         }
-        this.getHeyBean().registerUsers();
+        this.getHeyBean().registerUsers(this.username, this.password, this.work, this.phone, this.address, this.ccnumber, this.CCval, this.department, this.typePerson);
         return SUCCESS;
     }
 

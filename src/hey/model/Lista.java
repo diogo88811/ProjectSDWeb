@@ -1,7 +1,6 @@
 package rmiserver;
 
 import rmiserver.Pessoa;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

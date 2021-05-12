@@ -2,9 +2,7 @@ package hey.action;
 import com.opensymphony.xwork2.ActionSupport;
 import hey.model.ServerRmiBean;
 import org.apache.struts2.interceptor.SessionAware;
-
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.Map;
 
 public class createElectionAction extends ActionSupport implements SessionAware {
@@ -26,7 +24,7 @@ public class createElectionAction extends ActionSupport implements SessionAware 
         else{
             return ERROR;
         }
-        this.getHeyBean().createElection();
+        this.getHeyBean().createElection(this.nameElection, this.initDate, this.endDate, this.publicTarget);
         return SUCCESS;
     }
 

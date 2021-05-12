@@ -10,16 +10,20 @@
     <title>Hey!</title>
 </head>
 <body>
-<s:form action="createElection" method="post">
+<s:form action="infoList" method="post">
 
-    <s:text name="Nome Eleicao: " />
-    <s:textfield name="nameElection" /><br>
-    <s:text name="Data Inicio (aaaa-mm-dd hh:mm:ss): " />
-    <s:textfield name="initDate" /><br>
-    <s:text name="Data Fim (aaaa-mm-dd hh:mm:ss): " />
-    <s:textfield name="endDate" /><br>
-    <s:text name="Publico Alvo:" />
-    <s:textfield name="publicTarget" /><br>
+    <s:text name="Nome Lista: " />
+    <s:textfield name="nameList" /><br>
+
+    <s:text name="Candidato Principal " />
+    <p>
+        <c:forEach items="${heyBean.peopletoelection}" var="value">
+            <input type="radio" id="${value}" name="principalCandidate" value="${value}">
+            <label for="${value}">${value}</label><br>
+        </c:forEach>
+    </p>
+    <br>
+
     <s:submit />
 </s:form>
 </body>

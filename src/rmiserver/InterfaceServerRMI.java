@@ -9,4 +9,5 @@ public interface InterfaceServerRMI extends Remote {
 	public void SaveRegistry(rmiserver.Pessoa string) throws RemoteException;
 	public ArrayList<rmiserver.Pessoa> getPerson() throws RemoteException;
 	public ArrayList<rmiserver.Eleicao> getEleicoes() throws RemoteException;
-}
+	public void criarEleicao(rmiserver.Eleicao eleicao) throws RemoteException;
+	}

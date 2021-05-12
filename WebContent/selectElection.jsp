@@ -10,13 +10,7 @@
   <title>Hey!</title>
 </head>
 <body>
-<s:form action="addListToElection" method="post">
-
-  <s:text name="Nome Lista: " />
-  <s:textfield name="nameList" /><br>
-
-  <s:text name="Candidato Principal " />
-  <s:textfield name="principalCandidate" /><br>
+<s:form action="selectElection" method="post">
 
   <s:text name="Eleição: " />
   <p>

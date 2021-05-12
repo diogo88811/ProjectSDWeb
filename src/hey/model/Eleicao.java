@@ -10,14 +10,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Eleicao implements Serializable {
-
     /**
      *
      */
     private static final long serialVersionUID = 1L;
     public String nome, DataInicio, DataFim, publicoAlvo;
     int estado, votosBranco, votoNulo;
-
     public ArrayList<Lista> listas = new ArrayList<Lista>();
     public ArrayList<Pessoa> peopleWhoVoted = new ArrayList<Pessoa>();
 
@@ -30,7 +28,7 @@ public class Eleicao implements Serializable {
         this.listas = listas;
         this.peopleWhoVoted = peopleWhoVoted;
     }
-    public  Eleicao(){
+    public Eleicao(){
 
     }
     public String getNome() {
@@ -69,6 +67,7 @@ public class Eleicao implements Serializable {
     public void setListas(ArrayList<Lista> listas) {
         this.listas = listas;
     }
+
     @Override
     public String toString() {
         String pessoas = "";
@@ -84,41 +83,12 @@ public class Eleicao implements Serializable {
                 "\nVotos Nulos -> " + votoNulo +
                 "\nVotos Branco -> " + votosBranco;
     }
-
-    public void createEleicao(ArrayList<Pessoa> pessoa) throws IOException {
-        InputStreamReader input = new InputStreamReader(System.in);
-        BufferedReader reader = new BufferedReader(input);
-        String in;
-        Scanner scan = new Scanner(System.in);
-        int numberOfLists;
-        int numCandidate;
-
-        System.out.print("NOME ELEICAO: ");
-        in = reader.readLine();
-        this.nome = in;
-
-        System.out.print("DATA INICIO (aaaa-mm-dd hh:mm:ss): ");
-        in = reader.readLine();
-        this.DataInicio = in;
-
-        System.out.print("DATA FIM (aaaa-mm-dd hh:mm:ss): ");
-        in = reader.readLine();
-        this.DataFim = in;
-
-        System.out.println("PUBLICO ALVO: ");
-        System.out.println("<1> ESTUDANTE");
-        System.out.println("<2> DOCENTE");
-        System.out.println("<3> FUNCIONARIO");
-        int opt = scan.nextInt();
-        if(opt == 1){
-            this.publicoAlvo = "ESTUDANTE";
-        }
-        else if(opt == 2){
-            this.publicoAlvo = "DOCENTE";
-        }
-        else if(opt == 3){
-            this.publicoAlvo = "FUNCIONARIO";
-        }
+/*
+    public void createEleicao(String name, String dateInit, String dateEnd, String publicTarget) throws IOException {
+        this.nome = name;
+        this.DataInicio = dateInit;
+        this.DataFim = dateEnd;
+        this.publicoAlvo = publicTarget;
 
         System.out.println("NUMERO DE LISTAS: ");
         numberOfLists = scan.nextInt();
@@ -200,4 +170,6 @@ public class Eleicao implements Serializable {
                 break;
         }
     }
+
+ */
 }

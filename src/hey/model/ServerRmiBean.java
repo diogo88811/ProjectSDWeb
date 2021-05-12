@@ -6,10 +6,10 @@ import java.rmi.NotBoundException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
 import rmiserver.InterfaceServerRMI;
 import rmiserver.Eleicao;
 import rmiserver.Pessoa;
+import rmiserver.Lista;
 
 public class ServerRmiBean {
 	private InterfaceServerRMI server;
@@ -21,21 +21,21 @@ public class ServerRmiBean {
 	private String work;
 	private String CCval;
 	private String department;
+
 	private String nameElection;
 	private String initDate;
 	private String endDate;
 	private String publicTarget;
+
 	private String nameList;
 	private String principalCandidate;
 	private String electionSelected;
-	private ArrayList<String> personName = new ArrayList<String>();
-	private ArrayList<String> electionName = new ArrayList<String>();
-	private ArrayList<Eleicao> elections = new ArrayList<Eleicao>();
-	private ArrayList<Pessoa> listParticipants = new ArrayList<Pessoa>();
 	private String typePerson;
 	private String newElectionName;
 	private String newInitDateElection;
 	private String newEndDateElection;
+	private ArrayList<String> personName = new ArrayList<String>();
+	private ArrayList<String> electionName = new ArrayList<String>();
 
 	public ServerRmiBean() {
 		try {
@@ -45,7 +45,7 @@ public class ServerRmiBean {
 			e.printStackTrace(); // what happens *after* we reach this line?
 		}
 	}
-
+	//Verifica o tipo de utilizador(User/Admin)
 	public String verifyUsers() throws RemoteException {
 		boolean flag =  server.verifyUser(this.username,this.ccnumber,this.password);
 		for(int i = 0; i < server.getPerson().size();i++){
@@ -62,36 +62,51 @@ public class ServerRmiBean {
 		return "none";
 	}
 
-	public void registerUsers() throws IOException {
-		Pessoa pessoa = new Pessoa();
-		pessoa.RegisterPerson(this.username,this.phone,this.address,this.ccnumber,this.CCval,this.work,this.department,this.password,this.typePerson);
-		server.print_on_server(pessoa.toString());
+	//Cria um novo user ou admin
+	public void registerUsers(String nome, String password, String job, String telemovel, String morada, String CCnumber, String CCVal, String departamento, String typePerson) throws IOException {
+		Pessoa pessoa = new Pessoa(nome, password, job, telemovel, morada, CCnumber, CCVal, departamento, null, typePerson);
 		server.SaveRegistry(pessoa);
+		server.print_on_server("Pessoa Criada com Sucesso !");
 	}
 
-	public void createElection() throws  IOException {
+	//Cria uma eleição e adiciona ao array elections
+	public void createElection(String name, String dateInit, String dateEnd, String publicTarget) throws  IOException {
+		Eleicao eleicao = new Eleicao(name, dateInit, dateEnd, publicTarget, 0, null, null);
+		server.criarEleicao(eleicao);
 		server.print_on_server("Eleicao Criada com Sucesso !");
-		/*for(int i = 0; i <server.getEleicoes().size(); i++){
-			if(electionName.equals(server.getEleicoes().get(i).getNome())){
-				elections.add(server.getEleicoes().get(i));
-			}
-		}*/
 	}
 
-	/*public void addPersonByNameToList(String personNome) throws IOException{
-		for(int i = 0; i <server.getPerson().size(); i++){
-			if(personNome.equals(server.getPerson().get(i).getNome())){
-				listParticipants.add(server.getPerson().get(i));
+	//Cria uma Lista
+	public void createList(String nameList, String person, String election) throws  IOException {
+		/*
+		Pessoa addPerson;
+		for(int i=0; i<server.getPerson().size(); i++){
+			if(server.getPerson().get(i).getNome().equals(person)){
+				addPerson = server.getPerson().get(i);
 			}
 		}
-	}*/
-
-	public void createList() throws  IOException {
+		Lista lista = new Lista(null, person, nameList);
 		server.print_on_server("Lista Criada com Sucesso !");
+		 */
+	}
+
+	public ArrayList<String>  getpeopletoelection() throws RemoteException {
+		ArrayList<String> peopleToElection = new ArrayList<String>();
+		for(int i = 0; i<server.getEleicoes().size(); i++){
+			if(server.getEleicoes().get(i).getNome().equals(getElectionSelected())){
+				for(int j=0; j<server.getPerson().size(); j++){
+					if(server.getPerson().get(j).getTrabalho().equals(server.getEleicoes().get(i).getPublicoAlvo())){
+						peopleToElection.add(server.getPerson().get(j).getNome());
+					}
+				}
+			}
+		}
+		return peopleToElection;
 	}
 
 	public void updateElection(String eleicao, String nome, String init, String end){
-		for(int i=0; i<elections.size(); i++){
+		/*
+		for(int i=0; i<server.getEleicoes().size(); i++){
 			System.out.println(elections.get(i).getNome() + " = " + eleicao);
 			if(elections.get(i).getNome().equals(eleicao)){
 				if(!nome.equals("")){
@@ -105,6 +120,8 @@ public class ServerRmiBean {
 				}
 			}
 		}
+
+		 */
 	}
 
 	public ArrayList<String> getUsers() throws IOException{
@@ -122,8 +139,6 @@ public class ServerRmiBean {
 		}
 		return electionName;
 	}
-
-
 
 	public void setPersonName(ArrayList<String> personName) {
 		this.personName = personName;
@@ -205,10 +220,6 @@ public class ServerRmiBean {
 		this.typePerson = typePerson;
 	}
 
-	public void setElections(ArrayList<Eleicao> elections) {
-		this.elections = elections;
-	}
-
 	public void setNewElectionName(String newElectionName) {
 		this.newElectionName = newElectionName;
 	}
@@ -219,5 +230,9 @@ public class ServerRmiBean {
 
 	public void setNewEndDateElection(String newEndDateElection) {
 		this.newEndDateElection = newEndDateElection;
+	}
+
+	public String getElectionSelected() {
+		return electionSelected;
 	}
 }

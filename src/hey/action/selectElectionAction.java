@@ -7,35 +7,20 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.io.IOException;
 import java.util.Map;
 
-public class addListToElectionAction extends ActionSupport implements SessionAware {
+public class selectElectionAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
-    private String nameList = null;
-    private String principalCandidate = null;
     private String electionSelected = null;
 
     @Override
     public String execute() throws IOException {
-        System.out.println("selecionei: " + this.electionSelected);
-        if(!nameList.equals("") && !principalCandidate.equals("") && !electionSelected.equals("")){
-            this.getHeyBean().setNameList(this.nameList);
-            this.getHeyBean().setPrincipalCandidate(this.principalCandidate);
+        if(!electionSelected.equals("")){
             this.getHeyBean().setElectionSelected(this.electionSelected);
-            System.out.println("selecionei: " + this.electionSelected);
         }
         else{
             return ERROR;
         }
-        this.getHeyBean().createList();
         return SUCCESS;
-    }
-
-    public void setNameList(String nameList) {
-        this.nameList = nameList;
-    }
-
-    public void setPrincipalCandidate(String principalCandidate) {
-        this.principalCandidate = principalCandidate;
     }
 
     public void setElectionSelected(String electionSelected) {
