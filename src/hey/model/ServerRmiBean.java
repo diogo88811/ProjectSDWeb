@@ -123,6 +123,10 @@ public class ServerRmiBean {
 		server.removeElection(eleicao);
 	}
 
+	public void removeList() throws RemoteException{
+		server.removeList(this.electionSelectedToRemoveList, this.listSelected);
+	}
+
 	public ArrayList<String> getUsers() throws IOException{
 		personName.clear();
 		for(int i = 0; i<server.getPerson().size(); i++){
@@ -139,10 +143,10 @@ public class ServerRmiBean {
 		return electionName;
 	}
 
-	public ArrayList<String> getLists(String election) throws IOException{
+	public ArrayList<String> getLists() throws IOException{
 		listsElection.clear();
 		for(int i = 0; i<server.getEleicoes().size(); i++){
-			if(server.getEleicoes().get(i).getNome().equals(election)){
+			if(server.getEleicoes().get(i).getNome().equals(electionSelectedToRemoveList)){
 				for(int j = 0; j<server.getEleicoes().get(i).listas.size(); j++) {
 					listsElection.add(server.getEleicoes().get(i).listas.get(j).getNomeLista());
 				}

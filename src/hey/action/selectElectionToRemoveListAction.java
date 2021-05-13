@@ -13,13 +13,12 @@ public class selectElectionToRemoveListAction extends ActionSupport implements S
 
     @Override
     public String execute() throws IOException {
-        if(!electionSelectedToRemoveList.equals("")){
+        if (!electionSelectedToRemoveList.equals("")) {
             this.getHeyBean().setElectionSelectedToRemoveList(this.electionSelectedToRemoveList);
-        }
-        else{
+        } else {
             return ERROR;
         }
-        this.getHeyBean().removeElection(this.electionSelectedToRemoveList);
+       // this.getHeyBean().removeElection(this.electionSelectedToRemoveList);
         return SUCCESS;
     }
 

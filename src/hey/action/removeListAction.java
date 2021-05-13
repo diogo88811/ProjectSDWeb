@@ -19,8 +19,7 @@ public class removeListAction extends ActionSupport implements SessionAware {
         else{
             return ERROR;
         }
-        System.out.println("--" + this.listSelected);
-        this.getHeyBean().removeElection(this.listSelected);
+        this.getHeyBean().removeList();
         return SUCCESS;
     }
 
