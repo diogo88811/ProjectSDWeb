@@ -35,6 +35,7 @@ public class ServerRmiBean {
 	private String newInitDateElection;
 	private String newEndDateElection;
 	private String listParticipants;
+	private String electionSelectedToVote;
 
 	private String electionSelectedToRemoveList;
 	private String listSelected;
@@ -42,6 +43,7 @@ public class ServerRmiBean {
 	private String electionSelectedToChangeList;
 	private String listSelectedToChange;
 	private String newListName;
+	private String  listSelectedToVote;
 
 	private ArrayList<String> personName = new ArrayList<String>();
 	private ArrayList<String> electionName = new ArrayList<String>();
@@ -123,6 +125,41 @@ public class ServerRmiBean {
 				server.changeElection(eleicao, nome, init, end);
 			}
 		}
+	}
+
+	public ArrayList<String> getHello() throws RemoteException {
+		String aux = null;
+		ArrayList<String> auxElections = new ArrayList<String>();
+		for(int i = 0; i < server.getPerson().size();i++){
+			if(server.getPerson().get(i).getNome().equals(username)){
+				aux =  server.getPerson().get(i).getTrabalho();
+			}
+		}
+		for(int i = 0; i < server.getEleicoes().size(); i++){
+			if(server.getEleicoes().get(i).getPublicoAlvo().equals(aux)){
+				auxElections.add((server.getEleicoes().get(i).getNome()));
+			}
+		}
+		return auxElections;
+	}
+
+	public ArrayList<String> getListVote() throws RemoteException {
+		String aux = null;
+		ArrayList<String> auxList = new ArrayList<String>();
+		for(int i = 0; i < server.getEleicoes().size(); i++){
+			if(server.getEleicoes().get(i).getNome().equals(this.electionSelectedToVote)){
+				for(int j = 0; j < server.getEleicoes().get(i).getListas().size(); j++){
+					auxList.add(server.getEleicoes().get(i).getListas().get(j).getNomeLista());
+				}
+			}
+		}
+		return auxList;
+	}
+
+	public void savedVote() throws RemoteException {
+		System.out.println("entrei");
+		server.saveVotes(this.electionSelectedToVote,this.listSelectedToVote);
+		System.out.println("OUT");
 	}
 
 	public void updateList(String nome) throws RemoteException {
@@ -295,5 +332,13 @@ public class ServerRmiBean {
 
 	public void setNewListName(String newListName) {
 		this.newListName = newListName;
+	}
+
+	public void setElectionSelectedToVote(String electionSelectedToVote) {
+		this.electionSelectedToVote = electionSelectedToVote;
+	}
+
+	public void setListSelectedToVote(String listSelectedToVote) {
+		this.listSelectedToVote = listSelectedToVote;
 	}
 }

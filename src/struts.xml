@@ -35,8 +35,23 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
     <action name="login" class="hey.action.LoginAction" method="execute">
       <result name="success">/initialPage.jsp</result>
       <result name="login">/index.jsp</result>
-        <result name="error">/hey.jsp</result>
+        <result name="error">/vote.jsp</result>
     </action>
+
+      <action name="voteOnElection" >
+          <result>/voteOnElections.jsp</result>
+      </action>
+
+      <action name="voteOnElectionAction" class="hey.action.showElectionsToUser" method="execute">
+          <result name="success">/voteList.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
+
+      <action name="listToVoteAction" class="hey.action.voteListAction" method="execute">
+          <result name="success">/vote.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
+
 
       <action name="registerPersonAction" >
           <result>/register.jsp</result>
