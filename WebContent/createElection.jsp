@@ -14,12 +14,16 @@
 
     <s:text name="Nome Eleicao: " />
     <s:textfield name="nameElection" /><br>
+    <br>
     <s:text name="Data Inicio (aaaa-mm-dd hh:mm:ss): " />
     <s:textfield name="initDate" /><br>
+    <br>
     <s:text name="Data Fim (aaaa-mm-dd hh:mm:ss): " />
     <s:textfield name="endDate" /><br>
+    <br>
     <s:text name="Publico Alvo:" />
     <s:textfield name="publicTarget" /><br>
+    <br>
     <s:submit />
 </s:form>
 </body>

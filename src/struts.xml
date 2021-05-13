@@ -65,10 +65,6 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
           <result name="error">/selectElection.jsp</result>
       </action>
 
-      <action name="infoListAction" >
-          <result>/infoList.jsp</result>
-      </action>
-
       <action name="infoList" class="hey.action.infoListAction" method="execute">
           <result name="success">/initialPage.jsp</result>
           <result name="error">/infoList.jsp</result>
@@ -83,6 +79,28 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
           <result name="error">/index.jsp</result>
       </action>
 
-  </package>
+      <action name="removeElectionAction" >
+          <result>/selectElectionToRemove.jsp</result>
+      </action>
 
+      <action name="selectElectionToRemove" class="hey.action.removeElectionAction" method="execute">
+          <result name="success">/initialPage.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
+
+      <action name="removeListAction" >
+          <result>/selectElectionToRemoveList.jsp</result>
+      </action>
+
+      <action name="selectList" class="hey.action.selectElectionToRemoveListAction" method="execute">
+          <result name="success">/removeList.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
+
+      <action name="removeList" class="hey.action.removeListAction" method="execute">
+          <result name="success">/initialPage.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
+
+  </package>
 </struts>

@@ -14,7 +14,7 @@
 
     <s:text name="Nome Lista: " />
     <s:textfield name="nameList" /><br>
-
+    <br>
     <s:text name="Candidato Principal " />
     <p>
         <c:forEach items="${heyBean.peopletoelection}" var="value">
@@ -23,6 +23,15 @@
         </c:forEach>
     </p>
     <br>
+    <s:text name="Adicionar Pessoas:" />
+    <p>
+        <c:forEach items="${heyBean.peopletoelection}" var="value">
+            <input type="checkbox" id="${value}" name="listParticipants" value="${value}">
+            <label for="${value}">${value}</label><br>
+        </c:forEach>
+    </p>
+    <br>
+
 
     <s:submit />
 </s:form>
