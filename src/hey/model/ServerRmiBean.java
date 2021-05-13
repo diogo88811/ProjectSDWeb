@@ -148,7 +148,6 @@ public class ServerRmiBean {
 					}
 					if(flag == 0){
 						auxElections.add((server.getEleicoes().get(i).getNome()));
-						flag = 0;
 					}
 				}
 				else{
