@@ -6,23 +6,23 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.io.IOException;
 import java.util.Map;
 
-public class selectElectionToRemoveListAction extends ActionSupport implements SessionAware {
+public class selectElectionToChangeListAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
-    private String electionSelectedToRemoveList = null;
+    private String electionSelectedToChangeList = null;
 
     @Override
     public String execute() throws IOException {
-        if (!electionSelectedToRemoveList.equals("")) {
-            this.getHeyBean().setElectionSelectedToRemoveList(this.electionSelectedToRemoveList);
+        if (!electionSelectedToChangeList.equals("")) {
+            this.getHeyBean().setElectionSelectedToChangeList(this.electionSelectedToChangeList);
         } else {
             return ERROR;
         }
         return SUCCESS;
     }
 
-    public void setElectionSelectedToRemoveList(String electionSelectedToRemoveList) {
-        this.electionSelectedToRemoveList = electionSelectedToRemoveList;
+    public void setElectionSelectedToChangeList(String electionSelectedToChangeList) {
+        this.electionSelectedToChangeList = electionSelectedToChangeList;
     }
 
     public ServerRmiBean getHeyBean() {

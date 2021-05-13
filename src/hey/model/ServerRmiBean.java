@@ -30,17 +30,23 @@ public class ServerRmiBean {
 	private String nameList;
 	private String principalCandidate;
 	private String electionSelected;
-	private String electionSelectedToRemoveList;
 	private String typePerson;
 	private String newElectionName;
 	private String newInitDateElection;
 	private String newEndDateElection;
 	private String listParticipants;
+
+	private String electionSelectedToRemoveList;
 	private String listSelected;
+
+	private String electionSelectedToChangeList;
+	private String listSelectedToChange;
+	private String newListName;
 
 	private ArrayList<String> personName = new ArrayList<String>();
 	private ArrayList<String> electionName = new ArrayList<String>();
 	private ArrayList<String> listsElection = new ArrayList<String>();
+	private ArrayList<String> listsElectionToChange = new ArrayList<String>();
 
 
 	public ServerRmiBean() {
@@ -119,6 +125,10 @@ public class ServerRmiBean {
 		}
 	}
 
+	public void updateList(String nome) throws RemoteException {
+		server.changeList(this.electionSelectedToChangeList, this.listSelectedToChange, nome);
+	}
+
 	public void removeElection(String eleicao) throws RemoteException {
 		server.removeElection(eleicao);
 	}
@@ -153,6 +163,18 @@ public class ServerRmiBean {
 			}
 		}
 		return listsElection;
+	}
+
+	public ArrayList<String> getListtochangelist() throws IOException{
+		listsElectionToChange.clear();
+		for(int i = 0; i<server.getEleicoes().size(); i++){
+			if(server.getEleicoes().get(i).getNome().equals(electionSelectedToChangeList)){
+				for(int j = 0; j<server.getEleicoes().get(i).listas.size(); j++) {
+					listsElectionToChange.add(server.getEleicoes().get(i).listas.get(j).getNomeLista());
+				}
+			}
+		}
+		return listsElectionToChange;
 	}
 
 	public void setPersonName(ArrayList<String> personName) {
@@ -261,5 +283,17 @@ public class ServerRmiBean {
 
 	public void setElectionSelectedToRemoveList(String electionSelectedToRemoveList) {
 		this.electionSelectedToRemoveList = electionSelectedToRemoveList;
+	}
+
+	public void setElectionSelectedToChangeList(String electionSelectedToChangeList) {
+		this.electionSelectedToChangeList = electionSelectedToChangeList;
+	}
+
+	public void setListSelectedToChange(String listSelectedToChange) {
+		this.listSelectedToChange = listSelectedToChange;
+	}
+
+	public void setNewListName(String newListName) {
+		this.newListName = newListName;
 	}
 }

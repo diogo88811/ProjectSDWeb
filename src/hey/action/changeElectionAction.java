@@ -6,7 +6,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.io.IOException;
 import java.util.Map;
 
-public class changeElectionPropertiesAction extends ActionSupport implements SessionAware {
+public class changeElectionAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
     private String changeElectionSelected = null;

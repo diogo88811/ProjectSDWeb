@@ -70,14 +70,29 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
           <result name="error">/infoList.jsp</result>
       </action>
 
-      <action name="changeElectionPropertiesAction" >
+      <action name="changeElectionAction" >
           <result>/changeElection.jsp</result>
       </action>
 
-      <action name="changeElection" class="hey.action.changeElectionPropertiesAction" method="execute">
+      <action name="changeElection" class="hey.action.changeElectionAction" method="execute">
           <result name="success">/initialPage.jsp</result>
           <result name="error">/index.jsp</result>
       </action>
+
+      <action name="changeListAction">
+          <result>/selectElectionToChangeList.jsp</result>
+      </action>
+
+      <action name="electionToChangeSelected" class="hey.action.selectElectionToChangeListAction" method="execute">
+          <result name="success">/changeList.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
+
+      <action name="changeListSucess" class="hey.action.changeListAction" method="execute">
+          <result name="success">/initialPage.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
+
 
       <action name="removeElectionAction" >
           <result>/selectElectionToRemove.jsp</result>

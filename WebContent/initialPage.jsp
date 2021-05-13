@@ -11,7 +11,8 @@
     <p><a href="<s:url action="registerPersonAction" />">Registar um utilizador</a></p>
     <p><a href="<s:url action="createElectionAction" />">Criar Eleicao</a></p>
     <p><a href="<s:url action="selectElectionAction" />">Adicionar Lista a uma Eleicao</a></p>
-    <p><a href="<s:url action="changeElectionPropertiesAction" />">Modificar uma Eleicao</a></p>
+    <p><a href="<s:url action="changeElectionAction" />">Modificar uma Eleicao</a></p>
+    <p><a href="<s:url action="changeListAction" />">Modificar uma Lista</a></p>
     <p><a href="<s:url action="removeElectionAction" />">Remover uma Eleicao</a></p>
     <p><a href="<s:url action="removeListAction" />">Remover uma Lista</a></p>
     <p><a href="<s:url action="index" />">Sair de Sessão</a></p>
