@@ -20,6 +20,7 @@ public class voteListAction extends ActionSupport implements SessionAware {
 
         }
         this.getHeyBean().savedVote();
+        this.getHeyBean().peopleWhoVoted();
         return SUCCESS;
     }
 

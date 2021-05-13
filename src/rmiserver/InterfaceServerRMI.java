@@ -16,4 +16,5 @@ public interface InterfaceServerRMI extends Remote {
 	public void removeElection(String election) throws RemoteException;
 	public void removeList(String eleicao, String list) throws RemoteException;
 	public void saveVotes(String eleicao, String lista) throws RemoteException;
+	public void saveUserVote(String name, String ccNumber, String election) throws RemoteException;
 	}

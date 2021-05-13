@@ -129,6 +129,8 @@ public class ServerRmiBean {
 
 	public ArrayList<String> getHello() throws RemoteException {
 		String aux = null;
+		Pessoa pessoa = null;
+		int flag = 0;
 		ArrayList<String> auxElections = new ArrayList<String>();
 		for(int i = 0; i < server.getPerson().size();i++){
 			if(server.getPerson().get(i).getNome().equals(username)){
@@ -136,8 +138,23 @@ public class ServerRmiBean {
 			}
 		}
 		for(int i = 0; i < server.getEleicoes().size(); i++){
+			flag = 0;
 			if(server.getEleicoes().get(i).getPublicoAlvo().equals(aux)){
-				auxElections.add((server.getEleicoes().get(i).getNome()));
+				if(server.getEleicoes().get(i).getpeopleWhoVoted() != null){
+					for(int j = 0; j <server.getEleicoes().get(i).getpeopleWhoVoted().size(); j++){
+						if(server.getEleicoes().get(i).getpeopleWhoVoted().get(j).getNome().equals(username)){
+							flag = 1;
+						}
+					}
+					if(flag == 0){
+						auxElections.add((server.getEleicoes().get(i).getNome()));
+						flag = 0;
+					}
+				}
+				else{
+					auxElections.add((server.getEleicoes().get(i).getNome()));
+				}
+
 			}
 		}
 		return auxElections;
@@ -157,9 +174,14 @@ public class ServerRmiBean {
 	}
 
 	public void savedVote() throws RemoteException {
-		System.out.println("entrei");
 		server.saveVotes(this.electionSelectedToVote,this.listSelectedToVote);
-		System.out.println("OUT");
+
+	}
+
+	public void peopleWhoVoted() throws RemoteException {
+		System.out.println("Hello foi aqui");
+		server.saveUserVote(username,ccnumber,this.electionSelectedToVote);
+		System.out.println("bye");
 	}
 
 	public void updateList(String nome) throws RemoteException {
