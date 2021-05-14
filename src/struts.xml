@@ -76,55 +76,49 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
       </action>
 
       <action name="selectElection" class="hey.action.selectElectionAction" method="execute">
-          <result name="success">/infoList.jsp</result>
-          <result name="error">/selectElection.jsp</result>
-      </action>
-
-      <action name="infoList" class="hey.action.infoListAction" method="execute">
-          <result name="success">/initialPage.jsp</result>
-          <result name="error">/infoList.jsp</result>
+          <result name="success">/electionOptions.jsp</result>
+          <result name="error">/initialPage.jsp</result>
       </action>
 
       <action name="changeElectionAction" >
           <result>/changeElection.jsp</result>
       </action>
 
-      <action name="changeElection" class="hey.action.changeElectionAction" method="execute">
+      <action name="electionChanged" class="hey.action.changeElectionAction" method="execute">
           <result name="success">/initialPage.jsp</result>
           <result name="error">/index.jsp</result>
       </action>
 
-      <action name="changeListAction">
-          <result>/selectElectionToChangeList.jsp</result>
+      <action name="addListAction">
+          <result>/addListToElection.jsp</result>
       </action>
 
-      <action name="electionToChangeSelected" class="hey.action.selectElectionToChangeListAction" method="execute">
+      <action name="listCreated" class="hey.action.addListToElectionAction" method="execute">
+          <result name="success">/initialPage.jsp</result>
+          <result name="error">/infoList.jsp</result>
+      </action>
+
+      <action name="changeListAction">
+          <result>/selectList.jsp</result>
+      </action>
+
+      <action name="listSelected" class="hey.action.selectListToChangeAction" method="execute">
           <result name="success">/changeList.jsp</result>
           <result name="error">/index.jsp</result>
       </action>
 
-      <action name="changeListSucess" class="hey.action.changeListAction" method="execute">
+      <action name="listChanged" class="hey.action.changeListAction" method="execute">
           <result name="success">/initialPage.jsp</result>
           <result name="error">/index.jsp</result>
       </action>
 
-
-      <action name="removeElectionAction" >
-          <result>/selectElectionToRemove.jsp</result>
-      </action>
-
-      <action name="selectElectionToRemove" class="hey.action.removeElectionAction" method="execute">
+      <action name="removeElectionAction" class="hey.action.removeElectionAction" method="execute">
           <result name="success">/initialPage.jsp</result>
           <result name="error">/index.jsp</result>
       </action>
 
-      <action name="removeListAction" >
-          <result>/selectElectionToRemoveList.jsp</result>
-      </action>
-
-      <action name="selectList" class="hey.action.selectElectionToRemoveListAction" method="execute">
-          <result name="success">/removeList.jsp</result>
-          <result name="error">/index.jsp</result>
+      <action name="removeListAction">
+          <result>/removeList.jsp</result>
       </action>
 
       <action name="removeList" class="hey.action.removeListAction" method="execute">

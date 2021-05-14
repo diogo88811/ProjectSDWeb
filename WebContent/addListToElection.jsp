@@ -10,14 +10,14 @@
     <title>Hey!</title>
 </head>
 <body>
-<s:form action="infoList" method="post">
+<s:form action="listCreated" method="post">
 
     <s:text name="Nome Lista: " />
     <s:textfield name="nameList" /><br>
     <br>
     <s:text name="Candidato Principal " />
     <p>
-        <c:forEach items="${heyBean.peopletoelection}" var="value">
+        <c:forEach items="${heyBean.people}" var="value">
             <input type="radio" id="${value}" name="principalCandidate" value="${value}">
             <label for="${value}">${value}</label><br>
         </c:forEach>
@@ -25,14 +25,12 @@
     <br>
     <s:text name="Adicionar Pessoas:" />
     <p>
-        <c:forEach items="${heyBean.peopletoelection}" var="value">
+        <c:forEach items="${heyBean.people}" var="value">
             <input type="checkbox" id="${value}" name="listParticipants" value="${value}">
             <label for="${value}">${value}</label><br>
         </c:forEach>
     </p>
     <br>
-
-
     <s:submit />
 </s:form>
 </body>

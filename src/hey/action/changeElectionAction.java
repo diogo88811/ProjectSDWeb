@@ -9,30 +9,22 @@ import java.util.Map;
 public class changeElectionAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
-    private String changeElectionSelected = null;
     private String newElectionName = null;
     private String newInitDateElection = null;
     private String newEndDateElection = null;
 
     @Override
     public String execute() throws IOException {
-        if(!changeElectionSelected.equals("")){
-            this.getHeyBean().setNameList(this.changeElectionSelected);
-        }
-        else{
-            return ERROR;
-        }
         if(!newElectionName.equals("") && !newInitDateElection.equals("") && !newEndDateElection.equals("")){
             this.getHeyBean().setNewElectionName(this.newElectionName);
             this.getHeyBean().setNewInitDateElection(this.newInitDateElection);
             this.getHeyBean().setNewEndDateElection(this.newEndDateElection);
         }
-        this.getHeyBean().updateElection(this.changeElectionSelected, this.newElectionName, this.newInitDateElection, this.newEndDateElection);
+        else{
+            return ERROR;
+        }
+        this.getHeyBean().updateElection(this.newElectionName, this.newInitDateElection, this.newEndDateElection);
         return SUCCESS;
-    }
-
-    public void setChangeElectionSelected(String changeElectionSelected) {
-        this.changeElectionSelected = changeElectionSelected;
     }
 
     public void setNewElectionName(String newElectionName) {

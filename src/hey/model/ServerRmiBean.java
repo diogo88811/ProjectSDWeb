@@ -6,6 +6,8 @@ import java.rmi.NotBoundException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import rmiserver.InterfaceServerRMI;
 import rmiserver.Eleicao;
 import rmiserver.Pessoa;
@@ -13,7 +15,8 @@ import rmiserver.Lista;
 
 public class ServerRmiBean {
 	private InterfaceServerRMI server;
-	private String username; // username and password supplied by the user
+	//Create Person Variables
+	private String username;
 	private String password;
 	private String ccnumber;
 	private String phone;
@@ -22,14 +25,19 @@ public class ServerRmiBean {
 	private String CCval;
 	private String department;
 
+	//Create Election Variables
 	private String nameElection;
 	private String initDate;
 	private String endDate;
 	private String publicTarget;
 
+	//Create List Variables
 	private String nameList;
 	private String principalCandidate;
 	private String electionSelected;
+
+	//Change Election Variables
+	private String changeElectionSelected;
 	private String typePerson;
 	private String newElectionName;
 	private String newInitDateElection;
@@ -37,13 +45,18 @@ public class ServerRmiBean {
 	private String listParticipants;
 	private String electionSelectedToVote;
 
+	//Remove List Variables
 	private String electionSelectedToRemoveList;
 	private String listSelected;
 
+	//Change List Variables
 	private String electionSelectedToChangeList;
 	private String listSelectedToChange;
 	private String newListName;
 	private String  listSelectedToVote;
+	private String changePrincipalCandidate;
+	private String addPeopleToList;
+	private String deletePeopleFromList;
 
 	private ArrayList<String> personName = new ArrayList<String>();
 	private ArrayList<String> electionName = new ArrayList<String>();
@@ -59,6 +72,7 @@ public class ServerRmiBean {
 			e.printStackTrace(); // what happens *after* we reach this line?
 		}
 	}
+
 	//Verifica o tipo de utilizador(User/Admin)
 	public String verifyUsers() throws RemoteException {
 		boolean flag =  server.verifyUser(this.username,this.ccnumber,this.password);
@@ -103,30 +117,21 @@ public class ServerRmiBean {
 		server.addListToElection(aux, listName, p, participants);
 	}
 
-	//Adiciona no array peopleToElection as pessoas que podem votar numa determinada eleicao
-	public ArrayList<String> getpeopletoelection() throws RemoteException {
-		ArrayList<String> peopleToElection = new ArrayList<String>();
-		for(int i = 0; i<server.getEleicoes().size(); i++){
-			if(server.getEleicoes().get(i).getNome().equals(getElectionSelected())){
-				for(int j=0; j<server.getPerson().size(); j++){
-					if(server.getPerson().get(j).getTrabalho().equals(server.getEleicoes().get(i).getPublicoAlvo())){
-						peopleToElection.add(server.getPerson().get(j).getNome());
-					}
-				}
-			}
-		}
-		return peopleToElection;
-	}
-
-	//Modifica os parametros de uma Eleião
-	public void updateElection(String eleicao, String nome, String init, String end) throws RemoteException {
+	//Modifica os parametros de uma Eleição
+	public void updateElection(String nome, String init, String end) throws RemoteException {
+		System.out.println("entrei");
 		for(int i=0; i<server.getEleicoes().size(); i++){
-			if(server.getEleicoes().get(i).getNome().equals(eleicao)){
-				server.changeElection(eleicao, nome, init, end);
+			if(server.getEleicoes().get(i).getNome().equals(this.electionSelected)){
+				System.out.println("aqui");
+				server.changeElection(this.electionSelected, nome, init, end);
 			}
 		}
 	}
 
+	//Modifica Lista
+	public void updateList(String nome, String principalCandidate, ArrayList<String> addPeople, ArrayList<String> removePeople) throws RemoteException {
+		server.changeList(this.electionSelected, this.listSelectedToChange, nome, principalCandidate, addPeople, removePeople);
+	}
 	public ArrayList<String> getHello() throws RemoteException {
 		String aux = null;
 		Pessoa pessoa = null;
@@ -174,7 +179,6 @@ public class ServerRmiBean {
 
 	public void savedVote() throws RemoteException {
 		server.saveVotes(this.electionSelectedToVote,this.listSelectedToVote);
-
 	}
 
 	public void peopleWhoVoted() throws RemoteException {
@@ -183,18 +187,17 @@ public class ServerRmiBean {
 		System.out.println("bye");
 	}
 
-	public void updateList(String nome) throws RemoteException {
-		server.changeList(this.electionSelectedToChangeList, this.listSelectedToChange, nome);
+	//Remove Eleição
+	public void removeElection() throws RemoteException {
+		server.removeElection(electionSelected);
 	}
 
-	public void removeElection(String eleicao) throws RemoteException {
-		server.removeElection(eleicao);
-	}
-
+	//Remove Lista
 	public void removeList() throws RemoteException{
-		server.removeList(this.electionSelectedToRemoveList, this.listSelected);
+		server.removeList(this.electionSelected, this.listSelected);
 	}
 
+	//Retorna para o ArrayList electionName as pessoas (tipo <Pessoa> para o tipo <String>)
 	public ArrayList<String> getUsers() throws IOException{
 		personName.clear();
 		for(int i = 0; i<server.getPerson().size(); i++){
@@ -203,6 +206,7 @@ public class ServerRmiBean {
 		return personName;
 	}
 
+	//Retorna para o ArrayList electionName as eleicoes(tipo <Eleicao> para o tipo <String>)
 	public ArrayList<String> getElection() throws IOException{
 		electionName.clear();
 		for(int i = 0; i<server.getEleicoes().size(); i++){
@@ -211,10 +215,11 @@ public class ServerRmiBean {
 		return electionName;
 	}
 
+	//Retorna as Listas
 	public ArrayList<String> getLists() throws IOException{
 		listsElection.clear();
 		for(int i = 0; i<server.getEleicoes().size(); i++){
-			if(server.getEleicoes().get(i).getNome().equals(electionSelectedToRemoveList)){
+			if(server.getEleicoes().get(i).getNome().equals(electionSelected)){
 				for(int j = 0; j<server.getEleicoes().get(i).listas.size(); j++) {
 					listsElection.add(server.getEleicoes().get(i).listas.get(j).getNomeLista());
 				}
@@ -223,18 +228,106 @@ public class ServerRmiBean {
 		return listsElection;
 	}
 
-	public ArrayList<String> getListtochangelist() throws IOException{
-		listsElectionToChange.clear();
+	//Retorna pessoas que podem ser adicionadas a uma Lista
+	public ArrayList<String> getaddpersontochangelist() throws IOException{
+
+
+		ArrayList<String> addpersonToChangeList = new ArrayList<String>();
+		Eleicao eleicao = new Eleicao();
+		Lista lista = new Lista();
+
+		for(int i = 0; i<server.getEleicoes().size(); i++) {
+			if (server.getEleicoes().get(i).getNome().equals(electionSelected)) {
+				eleicao = server.getEleicoes().get(i);
+			}
+		}
+
+		for (int k = 0; k < eleicao.getListas().size(); k++) {
+			if (eleicao.getListas().get(k).getNomeLista().equals(listSelectedToChange)) {
+				lista = eleicao.getListas().get(k);
+			}
+		}
+
+		for(int i = 0; i< lista.getPessoas().size(); i++){
+			System.out.println( "-------- " + lista.getPessoas().get(i).getNome());
+		}
+
+		int flag = 0;
+
+		for (int j = 0; j < server.getPerson().size(); j++) {
+			if (server.getPerson().get(j).getTrabalho().equals(eleicao.getPublicoAlvo())) {
+				for(int k = 0; k<lista.getPessoas().size(); k++){
+					if(lista.getPessoas().get(k).getNome().equals(server.getPerson().get(j).getNome())){
+						flag = 1;
+					}
+				}
+				if(flag == 0){
+					addpersonToChangeList.add(server.getPerson().get(j).getNome());
+				}
+				flag = 0;
+			}
+		}
+
+		return addpersonToChangeList;
+	}
+
+	//Retorna as Pessoas que podem estar na eleicao(electionSelected)
+	public ArrayList<String> getpeople() throws RemoteException {
+		ArrayList<String> peopleToElection = new ArrayList<String>();
 		for(int i = 0; i<server.getEleicoes().size(); i++){
-			if(server.getEleicoes().get(i).getNome().equals(electionSelectedToChangeList)){
-				for(int j = 0; j<server.getEleicoes().get(i).listas.size(); j++) {
-					listsElectionToChange.add(server.getEleicoes().get(i).listas.get(j).getNomeLista());
+			if(server.getEleicoes().get(i).getNome().equals(getElectionSelected())){
+				for(int j=0; j<server.getPerson().size(); j++){
+					if(server.getPerson().get(j).getTrabalho().equals(server.getEleicoes().get(i).getPublicoAlvo())){
+						peopleToElection.add(server.getPerson().get(j).getNome());
+					}
 				}
 			}
 		}
-		return listsElectionToChange;
+		return peopleToElection;
 	}
 
+	public ArrayList<String> getdeletepersonfromlist() throws RemoteException{
+		ArrayList<String> remove = new ArrayList<String>();
+		Eleicao eleicao = new Eleicao();
+		Lista lista = new Lista();
+
+		for(int i = 0; i<server.getEleicoes().size(); i++) {
+			if (server.getEleicoes().get(i).getNome().equals(electionSelected)) {
+				eleicao = server.getEleicoes().get(i);
+			}
+		}
+
+		for (int k = 0; k < eleicao.getListas().size(); k++) {
+			if (eleicao.getListas().get(k).getNomeLista().equals(listSelectedToChange)) {
+				lista = eleicao.getListas().get(k);
+			}
+		}
+
+		int flag = 0;
+
+		for (int j = 0; j < server.getPerson().size(); j++) {
+			if (server.getPerson().get(j).getTrabalho().equals(eleicao.getPublicoAlvo())) {
+				for(int k = 0; k<lista.getPessoas().size(); k++){
+					if(lista.getPessoas().get(k).getNome().equals(server.getPerson().get(j).getNome())){
+						flag = 1;
+					}
+				}
+				if(flag == 1){
+					remove.add(server.getPerson().get(j).getNome());
+				}
+				flag = 0;
+			}
+		}
+
+		return remove;
+	}
+
+
+
+
+
+
+	//Set Functions
 	public void setPersonName(ArrayList<String> personName) {
 		this.personName = personName;
 	}
@@ -361,5 +454,21 @@ public class ServerRmiBean {
 
 	public void setListSelectedToVote(String listSelectedToVote) {
 		this.listSelectedToVote = listSelectedToVote;
+	}
+
+	public void setChangePrincipalCandidate(String changePrincipalCandidate) {
+		this.changePrincipalCandidate = changePrincipalCandidate;
+	}
+
+	public void setAddPeopleToList(String addPeopleToList) {
+		this.addPeopleToList = addPeopleToList;
+	}
+
+	public void setDeletePeopleFromList(String deletePeopleFromList) {
+		this.deletePeopleFromList = deletePeopleFromList;
+	}
+
+	public void setChangeElectionSelected(String changeElectionSelected) {
+		this.changeElectionSelected = changeElectionSelected;
 	}
 }

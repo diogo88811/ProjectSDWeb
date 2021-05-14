@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
-public class infoListAction extends ActionSupport implements SessionAware {
+public class addListToElectionAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
     private String nameList = null;

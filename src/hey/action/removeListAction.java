@@ -13,7 +13,7 @@ public class removeListAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() throws IOException {
-        if( !listSelected.equals("")){
+        if(!this.listSelected.equals("")){
             this.getHeyBean().setListSelected(this.listSelected);
         }
         else{

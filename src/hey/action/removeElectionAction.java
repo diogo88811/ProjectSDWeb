@@ -9,22 +9,11 @@ import java.util.Map;
 public class removeElectionAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
-    private String electionSelected = null;
 
     @Override
     public String execute() throws IOException {
-        if(!electionSelected.equals("")){
-            this.getHeyBean().setElectionSelected(this.electionSelected);
-        }
-        else{
-            return ERROR;
-        }
-        this.getHeyBean().removeElection(this.electionSelected);
+        this.getHeyBean().removeElection();
         return SUCCESS;
-    }
-
-    public void setElectionSelected(String electionSelected) {
-        this.electionSelected = electionSelected;
     }
 
     public ServerRmiBean getHeyBean() {

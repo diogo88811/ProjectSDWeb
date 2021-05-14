@@ -10,18 +10,34 @@
     <title>Hey!</title>
 </head>
 <body>
-<s:form action="changeListSucess" method="post">
+<s:form action="listChanged" method="post">
 
-    <s:text name="Lista: " />
+    <s:text name="Nome: " />
+    <s:textfield name="newListName" /><br>
+    <br>
+    <s:text name="Candidato Principal: "/>
     <p>
-        <c:forEach items="${heyBean.listtochangelist}" var="value">
-            <input type="radio" id="${value}" name="listSelectedToChange" value="${value}">
+        <c:forEach items="${heyBean.people}" var="value">
+            <input type="radio" id="${value}" name="changePrincipalCandidate" value="${value}">
             <label for="${value}">${value}</label><br>
         </c:forEach>
     </p>
     <br>
-    <s:text name="Nome: " />
-    <s:textfield name="newListName" /><br>
+    <s:text name="Adicionar Pessoas: "/>
+    <p>
+        <c:forEach items="${heyBean.addpersontochangelist}" var="value">
+            <input type="checkbox" id="${value}" name="addPeopleToList" value="${value}">
+            <label for="${value}">${value}</label><br>
+        </c:forEach>
+    </p>
+    <br>
+    <s:text name="Remover Pessoas: "/>
+    <p>
+        <c:forEach items="${heyBean.deletepersonfromlist}" var="value">
+            <input type="checkbox" id="${value}" name="deletePeopleFromList" value="${value}">
+            <label for="${value}">${value}</label><br>
+        </c:forEach>
+    </p>
     <br>
     <s:submit />
 </s:form>

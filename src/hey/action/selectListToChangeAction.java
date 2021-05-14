@@ -4,25 +4,29 @@ import com.opensymphony.xwork2.ActionSupport;
 import hey.model.ServerRmiBean;
 import org.apache.struts2.interceptor.SessionAware;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
-public class selectElectionToRemoveListAction extends ActionSupport implements SessionAware {
+public class selectListToChangeAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
-    private String electionSelectedToRemoveList = null;
+    private String listSelectedToChange = null;
 
     @Override
     public String execute() throws IOException {
-        if (!electionSelectedToRemoveList.equals("")) {
-            this.getHeyBean().setElectionSelectedToRemoveList(this.electionSelectedToRemoveList);
-        } else {
+        if( !listSelectedToChange.equals("") ){
+            this.getHeyBean().setListSelectedToChange(this.listSelectedToChange);
+        }
+        else{
             return ERROR;
         }
+        System.out.println("ola");
         return SUCCESS;
     }
 
-    public void setElectionSelectedToRemoveList(String electionSelectedToRemoveList) {
-        this.electionSelectedToRemoveList = electionSelectedToRemoveList;
+    public void setListSelectedToChange(String listSelectedToChange) {
+        this.listSelectedToChange = listSelectedToChange;
     }
 
     public ServerRmiBean getHeyBean() {

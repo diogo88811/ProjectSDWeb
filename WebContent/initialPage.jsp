@@ -7,14 +7,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Hey!</title>
 </head>
-<body>
-    <p><a href="<s:url action="registerPersonAction" />">Registar um utilizador</a></p>
-    <p><a href="<s:url action="createElectionAction" />">Criar Eleicao</a></p>
-    <p><a href="<s:url action="selectElectionAction" />">Adicionar Lista a uma Eleicao</a></p>
-    <p><a href="<s:url action="changeElectionAction" />">Modificar uma Eleicao</a></p>
-    <p><a href="<s:url action="changeListAction" />">Modificar uma Lista</a></p>
-    <p><a href="<s:url action="removeElectionAction" />">Remover uma Eleicao</a></p>
-    <p><a href="<s:url action="removeListAction" />">Remover uma Lista</a></p>
-    <p><a href="<s:url action="index" />">Sair de Sessão</a></p>
-</body>
+    <body>
+        <div style="margin: 0 auto; text-align: center">
+            <div1 style="margin: 0 auto; text-align: center">
+                <br>
+                <p style="font-size:50px; font-family: 'Courier New'">
+                    <a>Bem Vindo!</a>
+                </p>
+            </div1>
+            <br>
+            <p style="font-size:30px; font-family: 'Courier New'">
+                <a href="<s:url action="registerPersonAction" />">Registar um utilizador</a>
+            </p>
+            <p style="font-size:30px ;  font-family: 'Courier New'">
+                <a href="<s:url action="createElectionAction" />">Criar Eleicao</a>
+            </p>
+            <p style="font-size:30px ; font-family: 'Courier New'">
+                <a href="<s:url action="selectElectionAction" />">Gerir uma Eleicao</a>
+            </p>
+            <p style="font-size:30px ;  font-family: 'Courier New'">
+                <a href="<s:url action="index" />">Sair de Sessão</a>
+            </p>
+        </div>
+    </body>
 </html>

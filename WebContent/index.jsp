@@ -7,15 +7,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Hey!</title>
 </head>
-<body>
-	<s:form action="login" method="post">
-		<s:text name="Username:" />
-		<s:textfield name="username" /><br>
-		<s:text name="Password:" />
-		<s:textfield name="password" /><br>
-		<s:text name="ccNumber:" />
-		<s:textfield name="ccnumber" /><br>
-		<s:submit />
-	</s:form>
-</body>
+	<body>
+		<div1 style="margin: 0 auto; text-align: center">
+			<br>
+			<p style="font-size:50px; font-family: 'Courier New'">
+				<s:text name="Votação Online" />
+			</p>
+
+		</div1>
+
+		<div style="margin: 0 auto; text-align: center">
+			<s:form action="login" method="post">
+				<br>
+				<p style="font-size:30px; font-family: 'Courier New'">
+					<s:text name="Username:" />
+					<s:textfield name="username" /><br>
+				</p>
+				<p style="font-size:30px; font-family: 'Courier New'">
+					<s:text name="Password:" />
+					<s:textfield name="password" /><br>
+				</p>
+				<p style="font-size:30px; font-family: 'Courier New'">
+					<s:text name="Numero CC:" />
+					<s:textfield name="ccnumber" /><br>
+				</p>
+				<br>
+				<s:submit />
+			</s:form>
+		</div>
+	</body>
 </html>

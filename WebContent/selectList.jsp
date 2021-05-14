@@ -10,17 +10,17 @@
     <title>Hey!</title>
 </head>
 <body>
-<s:form action="electionChanged" method="post">
+<s:form action="listSelected" method="post">
 
-    <s:text name="Nome: " />
-    <s:textfield name="newElectionName" /><br>
+    <s:text name="Lista: " />
+    <p>
+        <c:forEach items="${heyBean.lists}" var="value">
+            <input type="radio" id="${value}" name="listSelectedToChange" value="${value}">
+            <label for="${value}">${value}</label><br>
+        </c:forEach>
+    </p>
     <br>
-    <s:text name="Data Inicio: " />
-    <s:textfield name="newInitDateElection" /><br>
-    <br>
-    <s:text name="Data Fim: " />
-    <s:textfield name="newEndDateElection" /><br>
-    <br>
+
     <s:submit />
 </s:form>
 </body>
