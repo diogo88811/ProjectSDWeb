@@ -18,36 +18,52 @@ public class changeListAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() throws IOException {
-        if(!newListName.equals("") && !this.changePrincipalCandidate.equals("") && !this.addPeopleToList.equals("") && !this.deletePeopleFromList.equals("")){
+        if(!this.newListName.equals("")){
             this.getHeyBean().setNewListName(this.newListName);
+            this.getHeyBean().updateList(this.newListName, "");
         }
         else{
             return ERROR;
         }
-
-        ArrayList<String> aux2 = new ArrayList<String>(Arrays.asList(addPeopleToList.split(",")));
-        ArrayList<String> temp2 = new ArrayList<String>();
-        for(int i = 0; i<aux2.size(); i++){
-            if(aux2.get(i).charAt(0) == ' '){
-                temp2.add(aux2.get(i).substring(1));
-            }
-            else{
-                temp2.add(aux2.get(i));
-            }
+        if(!this.changePrincipalCandidate.equals("")){
+            this.getHeyBean().setChangePrincipalCandidate(this.changePrincipalCandidate);
+            this.getHeyBean().updateList("", this.changePrincipalCandidate);
         }
-
-        ArrayList<String> aux3 = new ArrayList<String>(Arrays.asList(deletePeopleFromList.split(",")));
-        ArrayList<String> temp3 = new ArrayList<String>();
-        for(int i = 0; i<aux3.size(); i++){
-            if(aux3.get(i).charAt(0) == ' '){
-                temp3.add(aux3.get(i).substring(1));
-            }
-            else{
-                temp3.add(aux3.get(i));
-            }
+        else{
+            return ERROR;
         }
-
-        this.getHeyBean().updateList(this.newListName, this.changePrincipalCandidate, temp2, temp3);
+        if( !this.addPeopleToList.equals("")) {
+            this.getHeyBean().setAddPeopleToList(this.addPeopleToList);
+            ArrayList<String> aux2 = new ArrayList<String>(Arrays.asList(addPeopleToList.split(",")));
+            ArrayList<String> temp2 = new ArrayList<String>();
+            for (int i = 0; i < aux2.size(); i++) {
+                if (aux2.get(i).charAt(0) == ' ') {
+                    temp2.add(aux2.get(i).substring(1));
+                } else {
+                    temp2.add(aux2.get(i));
+                }
+            }
+            this.getHeyBean().addPeopleToList(temp2);
+        }
+        else{
+            return ERROR;
+        }
+        if( !this.deletePeopleFromList.equals("")) {
+            this.getHeyBean().setDeletePeopleFromList(this.deletePeopleFromList);
+            ArrayList<String> aux3 = new ArrayList<String>(Arrays.asList(deletePeopleFromList.split(",")));
+            ArrayList<String> temp3 = new ArrayList<String>();
+            for (int i = 0; i < aux3.size(); i++) {
+                if (aux3.get(i).charAt(0) == ' ') {
+                    temp3.add(aux3.get(i).substring(1));
+                } else {
+                    temp3.add(aux3.get(i));
+                }
+            }
+            this.getHeyBean().removePeopleFromList(temp3);
+        }
+        else{
+            return ERROR;
+        }
         return SUCCESS;
     }
 

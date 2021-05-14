@@ -1,6 +1,7 @@
 package hey.model;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.net.MalformedURLException;
@@ -129,9 +130,20 @@ public class ServerRmiBean {
 	}
 
 	//Modifica Lista
-	public void updateList(String nome, String principalCandidate, ArrayList<String> addPeople, ArrayList<String> removePeople) throws RemoteException {
-		server.changeList(this.electionSelected, this.listSelectedToChange, nome, principalCandidate, addPeople, removePeople);
+	public void updateList(String nome, String principalCandidate) throws RemoteException {
+		server.changeList(this.electionSelected, this.listSelectedToChange, nome, principalCandidate);
 	}
+
+	//Remove Pessoas de uma Lista
+	public void removePeopleFromList(ArrayList<String> removePeople) throws RemoteException {
+		server.removePeopleFromList(this.electionSelected, this.listSelectedToChange, removePeople);
+	}
+
+	//Adiciona Pessoas a uma Lista
+	public void addPeopleToList(ArrayList<String> addPeople) throws RemoteException{
+		server.addPeopleToList(this.electionSelected, this.listSelectedToChange, addPeople);
+	}
+
 	public ArrayList<String> getHello() throws RemoteException {
 		String aux = null;
 		Pessoa pessoa = null;
@@ -456,10 +468,6 @@ public class ServerRmiBean {
 		this.listSelectedToVote = listSelectedToVote;
 	}
 
-	public void setChangePrincipalCandidate(String changePrincipalCandidate) {
-		this.changePrincipalCandidate = changePrincipalCandidate;
-	}
-
 	public void setAddPeopleToList(String addPeopleToList) {
 		this.addPeopleToList = addPeopleToList;
 	}
@@ -470,5 +478,9 @@ public class ServerRmiBean {
 
 	public void setChangeElectionSelected(String changeElectionSelected) {
 		this.changeElectionSelected = changeElectionSelected;
+	}
+
+	public void setChangePrincipalCandidate(String changePrincipalCandidate) {
+		this.changePrincipalCandidate = changePrincipalCandidate;
 	}
 }
