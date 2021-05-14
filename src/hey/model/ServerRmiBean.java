@@ -189,6 +189,26 @@ public class ServerRmiBean {
 		return auxList;
 	}
 
+	public ArrayList<String> getResult() throws RemoteException {
+		System.out.println("Entrei aqui");
+		ArrayList<String> aux = new ArrayList<String>();
+		String auxS = "";
+		for(int i = 0; i < server.getEleicoes().size();i++){
+			if(server.getEleicoes().get(i).getNome().equals(this.electionSelected)) {
+				for (int j = 0; j < server.getEleicoes().get(i).getListas().size(); j++) {
+					auxS = server.getEleicoes().get(i).getListas().get(j).getNomeLista();
+					auxS += " " + String.valueOf(server.getEleicoes().get(i).getListas().get(j).getNumVotes());
+					aux.add(auxS);
+				}
+			}
+		}
+		System.out.println("Sai");
+		return aux;
+
+	}
+
+
+
 	public void savedVote() throws RemoteException {
 		server.saveVotes(this.electionSelectedToVote,this.listSelectedToVote);
 	}
