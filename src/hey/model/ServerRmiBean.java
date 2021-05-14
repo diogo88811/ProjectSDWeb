@@ -214,9 +214,7 @@ public class ServerRmiBean {
 	}
 
 	public void peopleWhoVoted() throws RemoteException {
-		System.out.println("Hello foi aqui");
 		server.saveUserVote(username,ccnumber,this.electionSelectedToVote);
-		System.out.println("bye");
 	}
 
 	//Remove Eleição
@@ -318,6 +316,7 @@ public class ServerRmiBean {
 		return peopleToElection;
 	}
 
+	//Retorna as Pessoas que podem ser removidas de uma lista
 	public ArrayList<String> getdeletepersonfromlist() throws RemoteException{
 		ArrayList<String> remove = new ArrayList<String>();
 		Eleicao eleicao = new Eleicao();
@@ -354,8 +353,30 @@ public class ServerRmiBean {
 		return remove;
 	}
 
-
-
+	//Retorna dados da eleicao selecionada
+	public ArrayList<String> getelectiondata() throws RemoteException{
+		ArrayList<String> dados = new ArrayList<String>();
+		Eleicao eleicao = new Eleicao();
+		for(int i = 0; i<server.getEleicoes().size(); i++){
+			if(server.getEleicoes().get(i).getNome().equals(this.electionSelected)){
+				eleicao = server.getEleicoes().get(i);
+			}
+		}
+		String nome = "Nome Eleicao: " + eleicao.getNome();
+		dados.add(nome);
+		String init = "Data Inicio: " + eleicao.DataInicio;
+		dados.add(init);
+		String end = "Data Fim: " + eleicao.DataFim;
+		dados.add(end);
+		String target = "Público Alvo: " + eleicao.getPublicoAlvo();
+		dados.add(target);
+		String listas = "Listas:";
+		dados.add(listas);
+		for(int i = 0; i<eleicao.listas.size(); i++){
+			dados.add(eleicao.listas.get(i).getNomeLista());
+		}
+		return dados;
+	}
 
 
 

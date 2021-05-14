@@ -10,17 +10,16 @@
     <title>Hey!</title>
 </head>
 <body>
-<div style="margin: 0 auto; text-align: center">
-    <p style="font-size:30px; font-family: 'Courier New'">
-        <br>
-        <c:forEach items="${heyBean.result}" var="value">
-            <c:out value="${value}"/><br><br>
-        </c:forEach>
-    </p>
-    <br>
-    <p style="font-size:30px; font-family: 'Courier New'">
-        <a href="<s:url action="initial" />">Voltar</a>
-    </p>
-</div>
+    <div style="margin: 0 auto; text-align: center">
+        <p style="font-size:30px; font-family: 'Courier New'">
+            <br>
+            <c:forEach items="${heyBean.electiondata}" var="value">
+                <c:out value="${value}"/><br><br>
+            </c:forEach>
+        </p>
+        <p style="font-size:30px; font-family: 'Courier New'">
+            <a href="<s:url action="initial" />">Voltar</a>
+        </p>
+    </div>
 </body>
 </html>

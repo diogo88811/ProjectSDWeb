@@ -13,19 +13,19 @@
         <div style="margin: 0 auto; text-align: center">
             <br>
             <p style="font-size:30px; font-family: 'Courier New'">
-                <a href="<s:url action="changeElectionAction" />">Modificar uma Eleicao</a>
+                <a href="<s:url action="changeElectionAction" />">Modificar Eleicao</a>
             </p>
             <p style="font-size:30px; font-family: 'Courier New'">
-                <a href="<s:url action="addListAction" />">Adicionar Lista a uma Eleicao</a>
+                <a href="<s:url action="addListAction" />">Adicionar Lista </a>
             </p>
             <p style="font-size:30px; font-family: 'Courier New'">
-                <a href="<s:url action="changeListAction" />">Modificar uma Lista</a>
+                <a href="<s:url action="changeListAction" />">Modificar Lista</a>
             </p>
             <p style="font-size:30px; font-family: 'Courier New'">
-                <a href="<s:url action="removeElectionAction" />">Remover uma Eleicao</a>
+                <a href="<s:url action="removeElectionAction" />">Remover Eleicao</a>
             </p>
             <p style="font-size:30px; font-family: 'Courier New'">
-                <a href="<s:url action="removeListAction" />">Remover uma Lista</a>
+                <a href="<s:url action="removeListAction" />">Remover Lista</a>
             </p>
         </div>
     </body>

@@ -28,6 +28,9 @@
             <p style="font-size:30px ; font-family: 'Courier New'">
                 <a href="<s:url action="selectionElectionToResultAction" />">Consultar Resultados das eleicoes Passadas</a>
             </p>
+            <p style="font-size:30px ; font-family: 'Courier New'">
+                <a href="<s:url action="selectElectionViewAction" />">Listas Dados de uma Eleicão</a>
+            </p>
             <p style="font-size:30px ;  font-family: 'Courier New'">
                 <a href="<s:url action="index" />">Sair de Sessão</a>
             </p>

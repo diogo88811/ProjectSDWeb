@@ -10,17 +10,17 @@
     <title>Hey!</title>
 </head>
 <body>
-<div style="margin: 0 auto; text-align: center">
-    <p style="font-size:30px; font-family: 'Courier New'">
-        <br>
-        <c:forEach items="${heyBean.result}" var="value">
-            <c:out value="${value}"/><br><br>
+<s:form action="selectElectionToView" method="post">
+
+    <s:text name="Eleição: " />
+    <p>
+        <c:forEach items="${heyBean.election}" var="value">
+            <input type="radio" id="${value}" name="electionSelected" value="${value}">
+            <label for="${value}">${value}</label><br>
         </c:forEach>
     </p>
     <br>
-    <p style="font-size:30px; font-family: 'Courier New'">
-        <a href="<s:url action="initial" />">Voltar</a>
-    </p>
-</div>
+    <s:submit />
+</s:form>
 </body>
 </html>
