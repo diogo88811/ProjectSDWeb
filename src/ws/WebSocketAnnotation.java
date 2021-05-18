@@ -1,22 +1,25 @@
 package ws;
 
+import hey.configurator.getHttpConfig;
+import hey.model.ServerRmiBean;
+import rmiserver.InterfaceServerRMI;
+
 import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
-import javax.websocket.OnOpen;
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnError;
-import javax.websocket.Session;
 
-@ServerEndpoint(value = "/ws")
+@ServerEndpoint(value = "/ws", configurator = getHttpConfig.class)
 public class WebSocketAnnotation {
     private static final AtomicInteger sequence = new AtomicInteger(1);
-    private final String username;
+    private String username;
     private Session session;
+    private HttpSession httpSession;
+    private ServerRmiBean server;
     private static final Set<WebSocketAnnotation> users = new CopyOnWriteArraySet<>();
 
     public WebSocketAnnotation() {
@@ -24,11 +27,24 @@ public class WebSocketAnnotation {
     }
 
     @OnOpen
-    public void start(Session session) {
+    public void start(Session session, EndpointConfig config) {
         this.session = session;
+        this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
+        server = (ServerRmiBean) this.httpSession.getAttribute("heyBean");
         users.add(this);
-        String message = "*" + username + "* connected.";
-        sendMessage(message);
+        username = server.getUsername();
+        String message = "*" + server.getUsername() + "* Logged In.";
+        System.out.println(server.getUsername() + "Encontra-se na eleicao: "+server.getElectionSelectedToVote());
+        if(!server.getIsAdmin()){
+            if(server.getElectionSelectedToVote() != null){
+                sendMessage(server.getUsername() + "Encontra-se na eleicao: "+server.getElectionSelectedToVote());
+            }
+            else{
+                sendMessage(message);
+            }
+        }
+
+
     }
 
     @OnClose

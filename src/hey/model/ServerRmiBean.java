@@ -20,6 +20,7 @@ public class ServerRmiBean {
 	private String username;
 	private String password;
 	private String ccnumber;
+	private boolean isAdmin = false;
 	private String phone;
 	private String address;
 	private String work;
@@ -44,7 +45,7 @@ public class ServerRmiBean {
 	private String newInitDateElection;
 	private String newEndDateElection;
 	private String listParticipants;
-	private String electionSelectedToVote;
+	private String electionSelectedToVote = null;
 
 	//Remove List Variables
 	private String electionSelectedToRemoveList;
@@ -76,14 +77,17 @@ public class ServerRmiBean {
 
 	//Verifica o tipo de utilizador(User/Admin)
 	public String verifyUsers() throws RemoteException {
+		this.electionSelectedToVote = null;
 		boolean flag =  server.verifyUser(this.username,this.ccnumber,this.password);
 		for(int i = 0; i < server.getPerson().size();i++){
 			if(server.getPerson().get(i).getNome().equals(this.username) && server.getPerson().get(i).getCCnumber().equals(this.ccnumber
 			)){
 				if(server.getPerson().get(i).getTypePerson().equals("ADMIN")){
+					isAdmin = true;
 					return "ADMIN";
 				}
 				else{
+					isAdmin = false;
 					return "USER";
 				}
 			}
@@ -215,6 +219,7 @@ public class ServerRmiBean {
 
 	public void peopleWhoVoted() throws RemoteException {
 		server.saveUserVote(username,ccnumber,this.electionSelectedToVote);
+		electionSelectedToVote = null;
 	}
 
 	//Remove Eleição
@@ -523,5 +528,17 @@ public class ServerRmiBean {
 
 	public void setChangePrincipalCandidate(String changePrincipalCandidate) {
 		this.changePrincipalCandidate = changePrincipalCandidate;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public String getElectionSelectedToVote() {
+		return electionSelectedToVote;
 	}
 }

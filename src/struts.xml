@@ -156,5 +156,9 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
           <result name="error">/index.jsp</result>
       </action>
 
+      <action name="chatAction">
+          <result>/chat.html</result>
+      </action>
+
   </package>
 </struts>
