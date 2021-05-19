@@ -1,6 +1,7 @@
 package rmiserver;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public interface InterfaceServerRMI extends Remote {
@@ -19,4 +20,5 @@ public interface InterfaceServerRMI extends Remote {
 	public void saveUserVote(String name, String ccNumber, String election) throws RemoteException;
 	public void removePeopleFromList(String election, String list, ArrayList<String> removePeople) throws RemoteException;
 	public void addPeopleToList(String election, String list, ArrayList<String> addPeople) throws RemoteException;
+	public boolean stateOfElections(rmiserver.Eleicao eleicao, int option) throws RemoteException, ParseException;
 }

@@ -6,6 +6,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
@@ -148,7 +149,7 @@ public class ServerRmiBean {
 		server.addPeopleToList(this.electionSelected, this.listSelectedToChange, addPeople);
 	}
 
-	public ArrayList<String> getHello() throws RemoteException {
+	public ArrayList<String> getHello() throws RemoteException, ParseException {
 		String aux = null;
 		Pessoa pessoa = null;
 		int flag = 0;
@@ -168,11 +169,17 @@ public class ServerRmiBean {
 						}
 					}
 					if(flag == 0){
-						auxElections.add((server.getEleicoes().get(i).getNome()));
+						if(server.stateOfElections(server.getEleicoes().get(i),2)){
+							auxElections.add((server.getEleicoes().get(i).getNome()));
+						}
+
 					}
 				}
 				else{
-					auxElections.add((server.getEleicoes().get(i).getNome()));
+					if(server.stateOfElections(server.getEleicoes().get(i),2)){
+						auxElections.add((server.getEleicoes().get(i).getNome()));
+					}
+
 				}
 
 			}
@@ -242,10 +249,24 @@ public class ServerRmiBean {
 	}
 
 	//Retorna para o ArrayList electionName as eleicoes(tipo <Eleicao> para o tipo <String>)
-	public ArrayList<String> getElection() throws IOException{
+	public ArrayList<String> getElection() throws IOException, ParseException {
 		electionName.clear();
 		for(int i = 0; i<server.getEleicoes().size(); i++){
-			electionName.add(server.getEleicoes().get(i).getNome());
+			if(server.stateOfElections(server.getEleicoes().get(i),0)){
+				electionName.add(server.getEleicoes().get(i).getNome());
+			}
+
+		}
+		return electionName;
+	}
+
+	public ArrayList<String> getElection1() throws IOException, ParseException {
+		electionName.clear();
+		for(int i = 0; i<server.getEleicoes().size(); i++){
+			if(server.stateOfElections(server.getEleicoes().get(i),1)){
+				electionName.add(server.getEleicoes().get(i).getNome());
+			}
+
 		}
 		return electionName;
 	}
