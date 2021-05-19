@@ -12,15 +12,18 @@
 <body>
 <s:form action="voteOnElectionAction" method="post">
 
-    <s:text name="Eleicao: " />
-    <p>
+<div style="margin: 0 auto; text-align: center">
+
+    <s:text name="Eleicao:" />
+        <p style="font-size:20px; font-family: 'Courier New'">
         <c:forEach items="${heyBean.hello}" var="value">
-            <input type="radio" id="${value}" name="electionSelectedToVote" value="${value}">
-            <label for="${value}">${value}</label><br>
-        </c:forEach>
-    </p>
-    <br>
-    <s:submit />
-</s:form>
+                <input type="radio" id="${value}" name="electionSelectedToVote" value="${value}">
+                <label for="${value}">${value}</label><br>
+            </c:forEach>
+        </p>
+        <br>
+        <s:submit />
+    </s:form>
+</div>
 </body>
 </html>

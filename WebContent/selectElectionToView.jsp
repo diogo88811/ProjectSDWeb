@@ -11,9 +11,11 @@
 </head>
 <body>
 <s:form action="selectElectionToView" method="post">
-
+<div style="margin: 0 auto; text-align: center">
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Eleição: " />
-    <p>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
         <c:forEach items="${heyBean.election}" var="value">
             <input type="radio" id="${value}" name="electionSelected" value="${value}">
             <label for="${value}">${value}</label><br>

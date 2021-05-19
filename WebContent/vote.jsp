@@ -85,7 +85,17 @@
 
 </head>
 <body>
-        <p><a href="<s:url action="voteOnElection" />">Votar</a></p>
-        <p><a href="<s:url action="index" />" onclick = "logOut()" >Log Out</a></p>
+<div style="margin: 0 auto; text-align: center">
+    <br>
+    <br>
+    <br>
+    <p style="font-size:20px; font-family: 'Courier New'">
+        <a href="<s:url action="voteOnElection" />">Votar</a>
+    </p>
+    <br>
+    <p style="font-size:20px; font-family: 'Courier New'">
+        <a href="<s:url action="index" />" onclick = "logOut()" >Log Out</a>
+    </p>
+</div>
 </body>
 </html>

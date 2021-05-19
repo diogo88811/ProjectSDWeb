@@ -9,40 +9,54 @@
 </head>
 <body>
 <s:form action="registPerson" method="post">
+<div style="margin: 0 auto; text-align: center">
+    <br>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Username:" />
     <s:textfield name="username" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Password:" />
     <s:textfield name="password" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="ccNumber:" />
     <s:textfield name="ccnumber" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Telemovel:" />
     <s:textfield name="phone" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
+
     <s:text name="Validade do CC:" />
     <s:textfield name="CCval" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
+
     <s:text name="Morada:" />
     <s:textfield name="address" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
+
     <s:text name="Função: " />
     <select name="work">
         <option>ESTUDANTE</option>
         <option>DOCENTE</option>
         <option>FUNCIONARIO</option>
     </select>
-    <br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Departamento" />
     <s:textfield name="department" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Tipo de Conta: " />
     <select name="typePerson">
         <option>ADMIN</option>
         <option>USER</option>
     </select>
+    </p>
     <br>
     <br>
     <s:submit />

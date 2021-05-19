@@ -36,6 +36,9 @@
             <p style="font-size:20px ; font-family: 'Courier New'">
                 <a href="<s:url action="chatAction" />">Listar utilizadores online</a>
             </p>
+            <p style="font-size:20px ; font-family: 'Courier New'">
+                <a href="<s:url action="createTable" />">Criar mesa de Voto</a>
+            </p>
             <p style="font-size:20px ;  font-family: 'Courier New'">
                 <a href="<s:url action="index" />">Sair de Sessão</a>
             </p>
