@@ -71,6 +71,7 @@ public class ServerRmiBean {
 	public ServerRmiBean() {
 		try {
 			server = (InterfaceServerRMI) Naming.lookup("//localhost:7000/RMIServer");
+			System.out.println("criado");
 		}
 		catch(NotBoundException|MalformedURLException|RemoteException e) {
 			e.printStackTrace(); // what happens *after* we reach this line?
