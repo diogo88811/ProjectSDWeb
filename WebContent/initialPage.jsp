@@ -15,26 +15,28 @@
                     <a>Bem Vindo!</a>
                 </p>
             </div1>
-            <br>
-            <p style="font-size:30px; font-family: 'Courier New'">
+            <p style="font-size:20px; font-family: 'Courier New'">
                 <a href="<s:url action="registerPersonAction" />">Registar um utilizador</a>
             </p>
-            <p style="font-size:30px ;  font-family: 'Courier New'">
+            <p style="font-size:20px ;  font-family: 'Courier New'">
                 <a href="<s:url action="createElectionAction" />">Criar Eleicao</a>
             </p>
-            <p style="font-size:30px ; font-family: 'Courier New'">
+            <p style="font-size:20px ; font-family: 'Courier New'">
                 <a href="<s:url action="selectElectionAction" />">Gerir uma Eleicao</a>
             </p>
-            <p style="font-size:30px ; font-family: 'Courier New'">
+            <p style="font-size:20px ; font-family: 'Courier New'">
+                <a href="<s:url action="selectUserAction" />">Listar Utilizadores</a>
+            </p>
+            <p style="font-size:20px ; font-family: 'Courier New'">
                 <a href="<s:url action="selectionElectionToResultAction" />">Consultar Resultados das eleicoes Passadas</a>
             </p>
-            <p style="font-size:30px ; font-family: 'Courier New'">
+            <p style="font-size:20px ; font-family: 'Courier New'">
                 <a href="<s:url action="selectElectionViewAction" />">Listas Dados de uma Eleicão</a>
             </p>
-            <p style="font-size:30px ; font-family: 'Courier New'">
+            <p style="font-size:20px ; font-family: 'Courier New'">
                 <a href="<s:url action="chatAction" />">Listar utilizadores online</a>
             </p>
-            <p style="font-size:30px ;  font-family: 'Courier New'">
+            <p style="font-size:20px ;  font-family: 'Courier New'">
                 <a href="<s:url action="index" />">Sair de Sessão</a>
             </p>
         </div>

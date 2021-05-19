@@ -27,6 +27,7 @@ public class ServerRmiBean {
 	private String work;
 	private String CCval;
 	private String department;
+	private String userSelected;
 
 	//Create Election Variables
 	private String nameElection;
@@ -94,6 +95,29 @@ public class ServerRmiBean {
 			}
 		}
 		return "none";
+	}
+
+	public ArrayList<String> getUserinfo() throws IOException{
+		ArrayList<String> result = new ArrayList<String>();
+		Pessoa a = new Pessoa();
+		for(int i = 0; i<server.getPerson().size(); i++){
+			if(server.getPerson().get(i).getNome().equals(userSelected)){
+				a = server.getPerson().get(i);
+			}
+		}
+		String nome = "Nome: " + a.getNome();
+		result.add(nome);
+		String cc = "CCNumber: " + a.getCCnumber();
+		result.add(cc);
+		String job = "Job: " + a.getTrabalho();
+		result.add(job);
+		String locais = "Locais onde votou:";
+		result.add(locais);
+		for(int i = 0; i<a.getTables().size(); i++){
+			String aux = a.getTables().get(i);
+			result.add(aux);
+		}
+		return result;
 	}
 
 	//Cria um novo user ou admin
@@ -218,10 +242,9 @@ public class ServerRmiBean {
 
 	}
 
-
-
 	public void savedVote() throws RemoteException {
 		server.saveVotes(this.electionSelectedToVote,this.listSelectedToVote);
+		server.saveVotedPlaceOnPeople(this.username, this.ccnumber, "Eleicao: " + electionSelectedToVote + "/ Local : Web");
 	}
 
 	public void peopleWhoVoted() throws RemoteException {
@@ -404,8 +427,6 @@ public class ServerRmiBean {
 		return dados;
 	}
 
-
-
 	//Set Functions
 	public void setPersonName(ArrayList<String> personName) {
 		this.personName = personName;
@@ -562,4 +583,9 @@ public class ServerRmiBean {
 	public String getElectionSelectedToVote() {
 		return electionSelectedToVote;
 	}
+
+	public void setUserSelected(String userSelected) {
+		this.userSelected = userSelected;
+	}
 }
+

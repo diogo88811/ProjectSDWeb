@@ -81,6 +81,15 @@ and should reside on the classpath of the webapp (generally /WEB-INF/classes). -
           <result name="success">/initialPage.jsp</result>
           <result name="error">/index.jsp</result>
       </action>
+      
+      <action name="selectUserAction">
+          <result>/selectUser.jsp</result>
+      </action>
+      
+      <action name="userSelected" class="hey.action.selectUserAction" method="execute">
+          <result name="success">/showUserResult.jsp</result>
+          <result name="error">/index.jsp</result>
+      </action>
 
       <action name="selectElectionAction" >
           <result>/selectElection.jsp</result>
