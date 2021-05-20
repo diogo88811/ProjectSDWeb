@@ -5,6 +5,7 @@ import hey.model.ServerRmiBean;
 import rmiserver.InterfaceServerRMI;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,7 +28,7 @@ public class WebSocketAnnotation {
     }
 
     @OnOpen
-    public void start(Session session, EndpointConfig config) {
+    public void start(Session session, EndpointConfig config) throws RemoteException {
         this.session = session;
         this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         server = (ServerRmiBean) this.httpSession.getAttribute("heyBean");
@@ -38,6 +39,7 @@ public class WebSocketAnnotation {
         if(!server.getIsAdmin()){
             if(server.getElectionSelectedToVote() != null){
                 sendMessage(server.getUsername() + "Encontra-se na eleicao: "+server.getElectionSelectedToVote());
+                sendMessage(server.realTimeData());
             }
             else{
                 sendMessage(message);

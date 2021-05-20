@@ -250,7 +250,8 @@ public class ServerRmiBean {
 
 	public void savedVote() throws RemoteException {
 		server.saveVotes(this.electionSelectedToVote,this.listSelectedToVote);
-		server.saveVotedPlaceOnPeople(this.username, this.ccnumber, "Eleicao: " + electionSelectedToVote + "/ Local : Web");
+		System.out.println("---_> "+this.username+"   ccnumber "+this.ccnumber+ "  eleciao "+electionSelectedToVote);
+		//server.saveVotedPlaceOnPeople(this.username, this.ccnumber, "Eleicao: " + electionSelectedToVote + " Local : Web");
 	}
 
 	public void peopleWhoVoted() throws RemoteException {
@@ -428,6 +429,21 @@ public class ServerRmiBean {
 			dados.add(eleicao.listas.get(i).getNomeLista());
 		}
 		return dados;
+	}
+
+	//funcao para dar os dados em tempo real
+	public String realTimeData() throws RemoteException {
+		String aux = "";
+		for(int i = 0; i < server.getEleicoes().size();i++){
+			if(server.getEleicoes().get(i).getNome().equals(electionSelectedToVote)){
+				aux = server.getEleicoes().get(i).getPublicoAlvo() + " Pessoas que votaram na eleicao:" ;
+				for(int j = 0; j < server.getEleicoes().get(i).getpeopleWhoVoted().size(); j++){
+					aux +=  "- "+server.getEleicoes().get(i).getpeopleWhoVoted().get(j).getNome() + "\n";
+				}
+			}
+		}
+
+		return aux;
 	}
 
 	//Set Functions
