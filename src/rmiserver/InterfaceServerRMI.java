@@ -24,4 +24,5 @@ public interface InterfaceServerRMI extends Remote {
 	public void saveVotedPlaceOnPeople(String name, String ccNumber, String table) throws RemoteException;
 	public boolean stateOfElections(rmiserver.Eleicao eleicao, int option) throws RemoteException, ParseException;
 	public void createTable(String name, String ip) throws IOException;
+	public void saveAdmin(String name, InterfaceClientRMI a) throws RemoteException ;
 	}

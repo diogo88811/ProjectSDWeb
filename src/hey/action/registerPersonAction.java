@@ -85,7 +85,7 @@ public class registerPersonAction extends ActionSupport implements SessionAware 
         this.typePerson = typePerson;
     }
 
-    public ServerRmiBean getHeyBean() {
+    public ServerRmiBean getHeyBean() throws RemoteException {
         if(!session.containsKey("heyBean"))
             this.setHeyBean(new ServerRmiBean());
         return (ServerRmiBean) session.get("heyBean");

@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import hey.model.ServerRmiBean;
 import org.apache.struts2.interceptor.SessionAware;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class selectListToChangeAction extends ActionSupport implements SessionAw
         this.listSelectedToChange = listSelectedToChange;
     }
 
-    public ServerRmiBean getHeyBean() {
+    public ServerRmiBean getHeyBean() throws RemoteException {
         if(!session.containsKey("heyBean"))
             this.setHeyBean(new ServerRmiBean());
         return (ServerRmiBean) session.get("heyBean");

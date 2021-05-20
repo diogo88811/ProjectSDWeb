@@ -6,16 +6,18 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.text.ParseException;
 import java.util.ArrayList;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import rmiserver.InterfaceServerRMI;
+import rmiserver.*;
 import rmiserver.Eleicao;
-import rmiserver.Pessoa;
 import rmiserver.Lista;
+import rmiserver.Pessoa;
+import ws.WebSocketAnnotation;
 
-public class ServerRmiBean {
+public class ServerRmiBean extends UnicastRemoteObject implements InterfaceClientRMI {
 	private InterfaceServerRMI server;
 	//Create Person Variables
 	private String username;
@@ -69,7 +71,8 @@ public class ServerRmiBean {
 	private ArrayList<String> listsElectionToChange = new ArrayList<String>();
 
 
-	public ServerRmiBean() {
+	public ServerRmiBean() throws RemoteException {
+		super();
 		try {
 			server = (InterfaceServerRMI) Naming.lookup("//localhost:7000/RMIServer");
 			System.out.println("criado");
@@ -77,6 +80,9 @@ public class ServerRmiBean {
 		catch(NotBoundException|MalformedURLException|RemoteException e) {
 			e.printStackTrace(); // what happens *after* we reach this line?
 		}
+
+		this.server.saveAdmin("heyBean",this);
+
 	}
 
 	//Verifica o tipo de utilizador(User/Admin)
@@ -614,5 +620,11 @@ public class ServerRmiBean {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-}
 
+	@Override
+	public void print_on_client(String s) throws RemoteException {
+		WebSocketAnnotation web = new WebSocketAnnotation();
+		web.receiveMessage("->" + s );
+		System.out.println("MESA ON" + s );
+	}
+}

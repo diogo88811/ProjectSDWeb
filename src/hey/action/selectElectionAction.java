@@ -5,6 +5,7 @@ import hey.model.ServerRmiBean;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.Map;
 
 public class selectElectionAction extends ActionSupport implements SessionAware {
@@ -27,7 +28,7 @@ public class selectElectionAction extends ActionSupport implements SessionAware 
         this.electionSelected = electionSelected;
     }
 
-    public ServerRmiBean getHeyBean() {
+    public ServerRmiBean getHeyBean() throws RemoteException {
         if(!session.containsKey("heyBean"))
             this.setHeyBean(new ServerRmiBean());
         return (ServerRmiBean) session.get("heyBean");
