@@ -11,20 +11,26 @@
 </head>
 <body>
 <s:form action="listCreated" method="post">
-
+<div style="margin: 0 auto; text-align: center">
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Nome Lista: " />
     <s:textfield name="nameList" /><br>
+    </p>
     <br>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Candidato Principal " />
-    <p>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
         <c:forEach items="${heyBean.people}" var="value">
             <input type="radio" id="${value}" name="principalCandidate" value="${value}">
             <label for="${value}">${value}</label><br>
         </c:forEach>
     </p>
     <br>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Adicionar Pessoas:" />
-    <p>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
         <c:forEach items="${heyBean.people}" var="value">
             <input type="checkbox" id="${value}" name="listParticipants" value="${value}">
             <label for="${value}">${value}</label><br>

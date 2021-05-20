@@ -11,19 +11,26 @@
 </head>
 <body>
 <s:form action="createElection" method="post">
-
+<div style="margin: 0 auto; text-align: center">
+    <p style="font-size:20px; font-family: 'Courier New'">
+    <br>
+    <br>
+    <br>
     <s:text name="Nome Eleicao: " />
     <s:textfield name="nameElection" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Data Inicio (aaaa-mm-dd hh:mm:ss): " />
     <s:textfield name="initDate" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Data Fim (aaaa-mm-dd hh:mm:ss): " />
     <s:textfield name="endDate" /><br>
-    <br>
+    </p>
+    <p style="font-size:20px; font-family: 'Courier New'">
     <s:text name="Publico Alvo:" />
     <s:textfield name="publicTarget" /><br>
-    <br>
+    </p>
     <s:submit />
 </s:form>
 </body>

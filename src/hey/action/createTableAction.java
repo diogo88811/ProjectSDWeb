@@ -1,31 +1,35 @@
 package hey.action;
-
 import com.opensymphony.xwork2.ActionSupport;
 import hey.model.ServerRmiBean;
 import org.apache.struts2.interceptor.SessionAware;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
-public class selectListToChangeAction extends ActionSupport implements SessionAware {
+public class createTableAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 4L;
     private Map<String, Object> session;
-    private String listSelectedToChange = null;
+    private String tableLocal = null;
+    private String ip = null;
 
     @Override
     public String execute() throws IOException {
-        if( !listSelectedToChange.equals("") ){
-            this.getHeyBean().setListSelectedToChange(this.listSelectedToChange);
+        if(!tableLocal.equals("") && !ip.equals("") ){
+            this.getHeyBean().setTableLocal(this.tableLocal);
+            this.getHeyBean().setIp(this.ip);
         }
         else{
             return ERROR;
         }
+        this.getHeyBean().createTable(this.tableLocal, this.ip);
         return SUCCESS;
     }
 
-    public void setListSelectedToChange(String listSelectedToChange) {
-        this.listSelectedToChange = listSelectedToChange;
+    public void setTableLocal(String tableLocal) {
+        this.tableLocal = tableLocal;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public ServerRmiBean getHeyBean() {

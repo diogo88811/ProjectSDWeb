@@ -1,4 +1,5 @@
 package rmiserver;
+import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.text.ParseException;
@@ -22,4 +23,5 @@ public interface InterfaceServerRMI extends Remote {
 	public void addPeopleToList(String election, String list, ArrayList<String> addPeople) throws RemoteException;
 	public void saveVotedPlaceOnPeople(String name, String ccNumber, String table) throws RemoteException;
 	public boolean stateOfElections(rmiserver.Eleicao eleicao, int option) throws RemoteException, ParseException;
-}
+	public void createTable(String name, String ip) throws IOException;
+	}

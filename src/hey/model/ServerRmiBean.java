@@ -28,6 +28,8 @@ public class ServerRmiBean {
 	private String CCval;
 	private String department;
 	private String userSelected;
+	private String tableLocal;
+	private String ip;
 
 	//Create Election Variables
 	private String nameElection;
@@ -64,7 +66,6 @@ public class ServerRmiBean {
 
 	private ArrayList<String> personName = new ArrayList<String>();
 	private ArrayList<String> electionName = new ArrayList<String>();
-	private ArrayList<String> listsElection = new ArrayList<String>();
 	private ArrayList<String> listsElectionToChange = new ArrayList<String>();
 
 
@@ -174,6 +175,10 @@ public class ServerRmiBean {
 		server.addPeopleToList(this.electionSelected, this.listSelectedToChange, addPeople);
 	}
 
+	public void createTable(String nome, String ip) throws IOException {
+		server.createTable(nome, ip);
+	}
+
 	public ArrayList<String> getHello() throws RemoteException, ParseException {
 		String aux = null;
 		Pessoa pessoa = null;
@@ -217,8 +222,10 @@ public class ServerRmiBean {
 		ArrayList<String> auxList = new ArrayList<String>();
 		for(int i = 0; i < server.getEleicoes().size(); i++){
 			if(server.getEleicoes().get(i).getNome().equals(this.electionSelectedToVote)){
-				for(int j = 0; j < server.getEleicoes().get(i).getListas().size(); j++){
-					auxList.add(server.getEleicoes().get(i).getListas().get(j).getNomeLista());
+				if(server.getEleicoes().get(i).getListas() != null) {
+					for (int j = 0; j < server.getEleicoes().get(i).getListas().size(); j++) {
+						auxList.add(server.getEleicoes().get(i).getListas().get(j).getNomeLista());
+					}
 				}
 			}
 		}
@@ -226,7 +233,6 @@ public class ServerRmiBean {
 	}
 
 	public ArrayList<String> getResult() throws RemoteException {
-		System.out.println("Entrei aqui");
 		ArrayList<String> aux = new ArrayList<String>();
 		String auxS = "";
 		for(int i = 0; i < server.getEleicoes().size();i++){
@@ -238,7 +244,6 @@ public class ServerRmiBean {
 				}
 			}
 		}
-		System.out.println("Sai");
 		return aux;
 
 	}
@@ -290,18 +295,19 @@ public class ServerRmiBean {
 			if(server.stateOfElections(server.getEleicoes().get(i),1)){
 				electionName.add(server.getEleicoes().get(i).getNome());
 			}
-
 		}
 		return electionName;
 	}
 
 	//Retorna as Listas
 	public ArrayList<String> getLists() throws IOException{
-		listsElection.clear();
+		ArrayList<String> listsElection = new ArrayList<String>();
 		for(int i = 0; i<server.getEleicoes().size(); i++){
 			if(server.getEleicoes().get(i).getNome().equals(electionSelected)){
-				for(int j = 0; j<server.getEleicoes().get(i).listas.size(); j++) {
-					listsElection.add(server.getEleicoes().get(i).listas.get(j).getNomeLista());
+				if(server.getEleicoes().get(i).getListas() != null) {
+					for (int j = 0; j < server.getEleicoes().get(i).listas.size(); j++) {
+						listsElection.add(server.getEleicoes().get(i).listas.get(j).getNomeLista());
+					}
 				}
 			}
 		}
@@ -326,10 +332,6 @@ public class ServerRmiBean {
 			if (eleicao.getListas().get(k).getNomeLista().equals(listSelectedToChange)) {
 				lista = eleicao.getListas().get(k);
 			}
-		}
-
-		for(int i = 0; i< lista.getPessoas().size(); i++){
-			System.out.println( "-------- " + lista.getPessoas().get(i).getNome());
 		}
 
 		int flag = 0;
@@ -587,6 +589,14 @@ public class ServerRmiBean {
 
 	public void setUserSelected(String userSelected) {
 		this.userSelected = userSelected;
+	}
+
+	public void setTableLocal(String tableLocal) {
+		this.tableLocal = tableLocal;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 }
 
