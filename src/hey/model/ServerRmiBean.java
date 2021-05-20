@@ -235,6 +235,8 @@ public class ServerRmiBean extends UnicastRemoteObject implements InterfaceClien
 				}
 			}
 		}
+		auxList.add("Voto Branco");
+		auxList.add("Voto Nulo");
 		return auxList;
 	}
 
@@ -244,9 +246,12 @@ public class ServerRmiBean extends UnicastRemoteObject implements InterfaceClien
 		for(int i = 0; i < server.getEleicoes().size();i++){
 			if(server.getEleicoes().get(i).getNome().equals(this.electionSelected)) {
 				for (int j = 0; j < server.getEleicoes().get(i).getListas().size(); j++) {
-					auxS = server.getEleicoes().get(i).getListas().get(j).getNomeLista();
-					auxS += " " + String.valueOf(server.getEleicoes().get(i).getListas().get(j).getNumVotes());
+					auxS = "Nome: " + server.getEleicoes().get(i).getListas().get(j).getNomeLista();
+					auxS += "\nVotos: " + String.valueOf(server.getEleicoes().get(i).getListas().get(j).getNumVotes())
+					+ "\nVotos Brancos: " + String.valueOf(server.getEleicoes().get(i).getVotosBranco())
+					+ "\nVotos Nulos: " + String.valueOf(server.getEleicoes().get(i).getVotosBranco());
 					aux.add(auxS);
+
 				}
 			}
 		}
@@ -255,9 +260,18 @@ public class ServerRmiBean extends UnicastRemoteObject implements InterfaceClien
 	}
 
 	public void savedVote() throws RemoteException {
-		server.saveVotes(this.electionSelectedToVote,this.listSelectedToVote);
-		System.out.println("---_> "+this.username+"   ccnumber "+this.ccnumber+ "  eleciao "+electionSelectedToVote);
-		//server.saveVotedPlaceOnPeople(this.username, this.ccnumber, "Eleicao: " + electionSelectedToVote + " Local : Web");
+		if(this.listSelectedToVote.equals("Voto Branco")){
+			server.saveVotes(this.electionSelectedToVote, "BRANCO");
+			server.saveVotedPlaceOnPeople(this.username, this.ccnumber, "Eleicao: " + electionSelectedToVote + " Local : Web");
+		}
+		else if(this.listSelectedToVote.equals("Voto Nulo")){
+			server.saveVotes(this.electionSelectedToVote, "NULL");
+			server.saveVotedPlaceOnPeople(this.username, this.ccnumber, "Eleicao: " + electionSelectedToVote + " Local : Web");
+		}
+		else{
+			server.saveVotes(this.electionSelectedToVote,this.listSelectedToVote);
+			server.saveVotedPlaceOnPeople(this.username, this.ccnumber, "Eleicao: " + electionSelectedToVote + " Local : Web");
+		}
 	}
 
 	public void peopleWhoVoted() throws RemoteException {

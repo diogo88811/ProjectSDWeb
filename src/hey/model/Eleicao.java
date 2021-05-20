@@ -31,6 +31,13 @@ public class Eleicao implements Serializable {
     public Eleicao(){
 
     }
+
+    public int getVotosBranco() {
+        return votosBranco;
+    }
+    public int getVotoNulo() {
+        return votoNulo;
+    }
     public String getNome() {
         return this.nome;
     }
