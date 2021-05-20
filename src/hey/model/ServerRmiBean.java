@@ -221,8 +221,10 @@ public class ServerRmiBean {
 		ArrayList<String> auxList = new ArrayList<String>();
 		for(int i = 0; i < server.getEleicoes().size(); i++){
 			if(server.getEleicoes().get(i).getNome().equals(this.electionSelectedToVote)){
-				for(int j = 0; j < server.getEleicoes().get(i).getListas().size(); j++){
-					auxList.add(server.getEleicoes().get(i).getListas().get(j).getNomeLista());
+				if(server.getEleicoes().get(i).getListas() != null) {
+					for (int j = 0; j < server.getEleicoes().get(i).getListas().size(); j++) {
+						auxList.add(server.getEleicoes().get(i).getListas().get(j).getNomeLista());
+					}
 				}
 			}
 		}
@@ -329,10 +331,6 @@ public class ServerRmiBean {
 			if (eleicao.getListas().get(k).getNomeLista().equals(listSelectedToChange)) {
 				lista = eleicao.getListas().get(k);
 			}
-		}
-
-		for(int i = 0; i< lista.getPessoas().size(); i++){
-			System.out.println( "-------- " + lista.getPessoas().get(i).getNome());
 		}
 
 		int flag = 0;

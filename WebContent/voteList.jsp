@@ -87,9 +87,11 @@
 </head>
 <body>
 <s:form action="listToVoteAction" method="post">
-
+<div style="margin: 0 auto; text-align: center">
+    <p style="font-size:30px; font-family: 'Courier New'">
     <s:text name="Listas: " />
-    <p>
+    </p>
+    <p style="font-size:30px; font-family: 'Courier New'">
         <c:forEach items="${heyBean.listVote}" var="value">
             <input type="radio" id="${value}" name="listSelectedToVote" value="${value}">
             <label for="${value}">${value}</label><br>
@@ -97,6 +99,7 @@
     </p>
     <br>
     <button type="submit" onclick = "outElection()" >Submit</button>
+</div>
 </s:form>
 </body>
 </html>
