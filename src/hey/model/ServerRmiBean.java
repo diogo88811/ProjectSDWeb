@@ -247,10 +247,15 @@ public class ServerRmiBean extends UnicastRemoteObject implements InterfaceClien
 			if(server.getEleicoes().get(i).getNome().equals(this.electionSelected)) {
 				for (int j = 0; j < server.getEleicoes().get(i).getListas().size(); j++) {
 					auxS = "Nome: " + server.getEleicoes().get(i).getListas().get(j).getNomeLista();
-					auxS += "\nVotos: " + String.valueOf(server.getEleicoes().get(i).getListas().get(j).getNumVotes())
-					+ "\nVotos Brancos: " + String.valueOf(server.getEleicoes().get(i).getVotosBranco())
-					+ "\nVotos Nulos: " + String.valueOf(server.getEleicoes().get(i).getVotosBranco());
 					aux.add(auxS);
+					String a = "Votos: " + String.valueOf(server.getEleicoes().get(i).getListas().get(j).getNumVotes());
+					aux.add(a);
+					String b = "Votos Brancos: " + String.valueOf(server.getEleicoes().get(i).getVotosBranco());
+					aux.add(b);
+					String c = "Votos Nulos: " + String.valueOf(server.getEleicoes().get(i).getVotosBranco());
+					aux.add(c);
+					String d = "___________________";
+					aux.add(d);
 
 				}
 			}
